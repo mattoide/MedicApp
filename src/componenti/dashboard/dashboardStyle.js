@@ -5,8 +5,9 @@ import {
 
 module.exports = StyleSheet.create({
 
-    view: {
-        backgroundColor: 'red'
-    }
+    mainView: {
+        flex: 1,
+        backgroundColor:'#2E2A2A',
+    },
 
 });

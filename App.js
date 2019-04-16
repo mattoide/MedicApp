@@ -1,29 +1,103 @@
+import React from 'react';
+
 import {
-  createStackNavigator,
-  createAppContainer
+
+  View,
+  ScrollView,
+  TouchableOpacity,
+  Text
+} from 'react-native';
+
+import {
+  createDrawerNavigator,
+  createAppContainer,
+  DrawerItems, SafeAreaView
 } from 'react-navigation';
 
+import Logout from './src/componenti/utils/logout';
+import AutodiagnosiC from './src/componenti/utils/autodiagnosi';
+import UserHeader from './src/componenti/userheaderdrawer/userheaderdrawer';
+
+
 import Login from './src/componenti/login/login';
-import Home from './src/componenti/home/home';
+import Dashboard from './src/componenti/dashboard/dashboard';
+import Lineadiretta from './src/componenti/lineadiretta/lineadiretta';
+import Riabilitazione from './src/componenti/riabilitazione/riabilitazione';
+import Classifica from './src/componenti/classifica/classifica';
+import Informazioni from './src/componenti/informazioni/informazioni';
+import Autodiagnosi from './src/componenti/autodiagnosi/autodiagnosi';
 
 
-const Navigatore = createStackNavigator(
-  {
-    Login: Login,
-    Home: Home,
-  },
+
+const CustomDrawerContentComponent = (props) => (
+  // <View style={{flex:1}}>
+  <ScrollView> 
+    <SafeAreaView style={{flex:1,alignSelf:'center'}} forceInset={{ top: 'always', horizontal: 'never' }}>
+
+      <UserHeader a={'aasasa'}/>
+      <DrawerItems {...props} />
+
+      <View style={{flex:1, justifyContent:'flex-end', }}> 
+
+      <AutodiagnosiC/>
+      <Logout/>
 
 
-  {
-    initialRouteName: 'Login',
+      </View>
+      
+          
+    </SafeAreaView>
+    </ScrollView>
+  // </View>
+);
 
-    headerMode: 'none',
-    navigationOptions: {
-      headerVisible: false,
-  }
+  
+  const MyDrawerNavigator = createDrawerNavigator(
+    { 
+      Login: {
+          screen: Login,
+        },
+        Dashboard: {
+          screen: Dashboard,
+        },
+        Riabilitazione: {
+          screen: Riabilitazione,
+        },
+        Lineadiretta: {
+          screen: Lineadiretta,
+        },
+        Classifica: {
+          screen: Classifica,
+        },
+        Informazioni: {
+          screen: Informazioni,
+        },
+        Autodiagnosi: {
+          screen: Autodiagnosi,
+        },
+        
+        
+    },{
+      navigationOptions:{
+
+      },
+      drawerBackgroundColor:'#363636',
+      initialRouteName:'Login',
+      contentComponent: CustomDrawerContentComponent,
+      contentOptions:{
+      //  activeBackgroundColor:'#988C6C',
+       activeTintColor:'#988C6C',
+       inactiveTintColor:'#988C6C'
+     },
+     defaultNavigationOptions:{
+       header:CustomDrawerContentComponent
+     }
+
+    }
+ 
+     );
     
-  });
+     
+    const App = createAppContainer(MyDrawerNavigator);
 
-  const App = createAppContainer(Navigatore);
-
-  export default App;
+    export default App; 

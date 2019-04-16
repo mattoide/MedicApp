@@ -23,8 +23,10 @@ bottom: -100,
     signleInput:{
         borderColor: '#988C6C',
         borderStyle: 'solid',
-        borderBottomWidth: 1,
+        borderBottomWidth: 1, 
         textAlign: 'center',
+        paddingRight: '9%',
+        color:'#A42B46'
 
     },
     a:{

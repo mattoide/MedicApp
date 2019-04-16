@@ -3,22 +3,24 @@ import React, {
 } from 'react';
 
 import {
-    NetInfo,
     TextInput,
     View,
-    Button,
-    StyleSheet,
     Text,
     ToastAndroid,
-    Image,
-    TouchableOpacity,
-    Modal,
-    Icon
-} from 'react-native';
+    TouchableOpacity} from 'react-native';
 
-var style = require('./loginStyle');
+import Caricamento from '../loading/caricamento';
+import {storeUser} from '../utils/storage';
+
+import DrawerButton from '../utils/drawerbutton';
+
+var style = require('./loginStyle'); 
 var fetchTimeout = require('fetch-timeout');
 
+
+
+export const loginUrl = 'http://appdev.novus.cc:8000/api/login';
+// export const loginUrl = 'http://192.168.1.33:8000/api/login';  
 
 export default class Login extends Component {
 
@@ -27,25 +29,44 @@ export default class Login extends Component {
 
         this.state = {
            // email: '',
-            email: '666matto666@gmail.com',
-            password: '1111',
-            fetchTimeoutTime: 1000,
+        //    email: 'a@a.it',
+        //    password: '1111',
+            email: '_',
+            password: '_',
+            fetchTimeoutTime: 10000,
+            caricamento: false,
+            spinner: '',
+            disableView: 'auto',
+
 
             user:{}
         };
+
+
     }
 
+    static navigationOptions = {
+        drawerLabel: () => null     
+      };
+ 
     render() {
-        return (
-          <View style={style.mainView}>
+        let caricamento = this.isLoading();
 
-<View style={style.inputView}>
+        return (
+            
+          <View style={style.mainView} pointerEvents={this.state.disableView} >
+           
+ {/* <DrawerButton/> */}
+             
+ {caricamento}
+
+        <View style={style.inputView}>
 
         <TextInput style={style.signleInput}
          inlineImageLeft='login_user' 
-          placeholder="nome utente"
+          placeholder="e-mail"
           placeholderTextColor = '#988C6C'
-          onChangeText={(input) => this.state.email = input}
+          onChangeText={(input) => this.state.email = input}          
           /> 
           
           <TextInput style={style.signleInput}
@@ -92,7 +113,7 @@ export default class Login extends Component {
 
       login() {
 
-
+        this.caricamento(true);
 
         var params = {
             email: this.state.email,
@@ -109,11 +130,12 @@ export default class Login extends Component {
             method: 'POST',
            // headers: headers,
             body: formData
-        };
+        }; 
 
-        return fetchTimeout('http://192.168.1.11:8000/api/login', request, this.state.fetchTimeoutTime, "Il server non risponde")
+        return fetchTimeout(loginUrl, request, this.state.fetchTimeoutTime, "Il server non risponde")
     
             .then((response) => {
+
                 switch (response.status) {
                     case 200:
                         response.json()
@@ -121,25 +143,66 @@ export default class Login extends Component {
                                 this.setState({
                                     user: responseJson
                                 });
-                            });
+
+                                storeUser(this.state.user, (err) => {     
+                                    
+                                    if(err)
+                                        console.log(err)
+                                     else 
+                                        this.props.navigation.navigate('Dashboard');
+                                     
+
+                                     this.caricamento(false);
+
+                                   
+                                });                              
+                        });
+
+                            
 
                         break;
     
                     default:
+                    
                     response.json()
                             .then((responseJson) => {
-                                    console.log(responseJson)
-    
-    
+                                ToastAndroid.showWithGravity(responseJson, ToastAndroid.SHORT, ToastAndroid.BOTTOM)
                             });
+
+                        this.caricamento(false); 
+                                    
                         break; 
+                        
                 }
     
     
             }).catch((error) => {
                 // this.showTimeoutError(error)
                 console.log(error)
+                this.caricamento(false); 
+
+                ToastAndroid.showWithGravity(error, ToastAndroid.SHORT, ToastAndroid.BOTTOM)
+
             });
+
     }
+
+    caricamento(pCaricamento){
+
+        this.setState({caricamento:pCaricamento});
+        if(pCaricamento == 'false')
+            this.setState({disableView: 'auto'})
+        else if(pCaricamento == 'true')
+            this.setState({disableView:'none'});
+
+    }
+
+    isLoading(){ 
+        return this.state.caricamento == true ? <Caricamento></Caricamento> : null;
+    }
+
+    
 }
+
+
 
