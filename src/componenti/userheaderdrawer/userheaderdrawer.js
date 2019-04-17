@@ -68,7 +68,7 @@ export default class UserHeader extends Component {
           <View style={style.mainView}>
 
             <Image 
-            source={{uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png'}}
+            source={require('../../immagini/face.jpg')}
             style={{ height: 150, width: 150, borderRadius: 200, margin:'10%'}} 
             /> 
 

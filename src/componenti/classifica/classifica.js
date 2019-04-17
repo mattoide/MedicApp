@@ -10,9 +10,10 @@ import {getStoredUser} from '../utils/storage';
 
 var style = require('./classificaStyle');
 
-import Icon from 'react-native-vector-icons/FontAwesome/';
+import Icon from 'react-native-vector-icons/Foundation/';
 
 import DrawerButton from '../utils/drawerbutton';
+
 
 
 
@@ -53,9 +54,53 @@ export default class Classifica extends Component {
         return (
           <View style={style.mainView}>
 <DrawerButton/>
-<Text style={{textAlign:'center', fontSize:20, color:'#988C6C'}}> Classifica </Text>
 
-          </View>
+<View style={{flex:1, marginTop:'15%'}}>
+<View style={style.linea}/>
+<View style={style.linea}/>
+<View style={style.linea}/>
+<View style={style.linea}/>
+</View>
+
+<View style={{flex:1, position:'absolute', top:100, left:100}}>
+<Icon name="foot" size={50} color="#988C6C" /> 
+</View> 
+
+<View style={{flex:1, position:'absolute', top:180, left:20}}>
+<Icon name="foot" size={50} color="#988C6C" /> 
+</View> 
+
+<View style={{flex:1, position:'absolute', top:260, left:260}}>
+<Icon name="foot" size={50} color="#988C6C" /> 
+</View> 
+
+<View style={{flex:1, position:'absolute', top:290, left:60}}>
+<Icon name="foot" size={50} color="#A32B47" /> 
+</View> 
+
+<View style={{flex:1, position:'absolute', top:340, left:230}}>
+<Icon name="foot" size={50} color="#988C6C" /> 
+</View> 
+
+<View style={{flex:1, position:'absolute', top:60, left:290}}>
+<Icon name="foot" size={50} color="#988C6C" /> 
+</View> 
+
+
+<View style={{flex:1, position:'absolute', top:460, left:290}}>
+<Icon name="foot" size={50} color="#988C6C" /> 
+</View> 
+
+<View style={{flex:1, position:'absolute', top:420, left:3}}>
+<Icon name="foot" size={50} color="#988C6C" /> 
+</View> 
+
+<View style={{flex:1, position:'absolute', top:600, left:100}}>
+<Icon name="foot" size={50} color="#988C6C" /> 
+</View> 
+
+          </View> 
         );
       }
 }
+{/* <Icon name="foot" size={50} color="#988C6C" /> */}

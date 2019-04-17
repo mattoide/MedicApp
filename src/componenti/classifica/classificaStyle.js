@@ -13,4 +13,12 @@ module.exports = StyleSheet.create({
 
     },
 
+    linea:{
+            height:'25%',
+            width:'3%',
+            backgroundColor:'white',
+            alignSelf:'center',
+            marginBottom:'15%'
+    }
+
 });

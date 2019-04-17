@@ -11,7 +11,7 @@ var style = require('./dashboardStyle');
 
 import {getStoredUser} from '../utils/storage';
 
-import Icon from 'react-native-vector-icons/SimpleLineIcons/';
+import Icon from 'react-native-vector-icons/Entypo/';
 import IconFontAwsome from 'react-native-vector-icons/FontAwesome5/';
 import * as Progress from 'react-native-progress';
 
@@ -27,9 +27,8 @@ export class Passi extends Component{
   render(){
 
     return (
-
     <View style={{flex:1,justifyContent:'center'}}>
-        <Progress.Circle style={{}} size={200} color='#A32B47' unfilledColor='#333333' borderColor='#2E2A2A' indeterminate={false} progress={this.props.percpassi}  />
+        <Progress.Circle style={{}} size={200} color='#A32B47' unfilledColor='#333333' borderColor='#2E2A2A' indeterminate={false} progress={parseFloat(this.props.percpassi)}  />
         <View style={{position:'absolute', justifyContent:'center',alignSelf:'center', alignItems:'center'}}>
         <IconFontAwsome name="shoe-prints" size={50} color="#988C6C" />
         <Text style={{fontSize:25, color:'#988C6C', }}>{this.props.passi} passi</Text>
@@ -69,7 +68,7 @@ export default class Dashboard extends Component {
       const min = 1;
       const max = 100;
       const rand = min + Math.random() * (max - min);
-      return rand/100;
+      return rand/max;
     }
 
     random2(){
@@ -96,7 +95,7 @@ export default class Dashboard extends Component {
             else if(val){
               this.setState({user: JSON.parse(val)}) 
 
-              console.log(val)
+             // console.log(val)
 
             }
         });

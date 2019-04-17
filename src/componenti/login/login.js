@@ -28,9 +28,9 @@ export default class Login extends Component {
         super(props);
 
         this.state = {
-           // email: '',
         //    email: 'a@a.it',
         //    password: '1111',
+
             email: '_',
             password: '_',
             fetchTimeoutTime: 10000,
@@ -181,8 +181,12 @@ export default class Login extends Component {
                 console.log(error)
                 this.caricamento(false); 
 
-                ToastAndroid.showWithGravity(error, ToastAndroid.SHORT, ToastAndroid.BOTTOM)
+                if(typeof error == 'string')
+                    ToastAndroid.showWithGravity(error, ToastAndroid.SHORT, ToastAndroid.BOTTOM)
+                else 
+                    ToastAndroid.showWithGravity('Errore di rete sconosciuto', ToastAndroid.SHORT, ToastAndroid.BOTTOM)
 
+        
             });
 
     }

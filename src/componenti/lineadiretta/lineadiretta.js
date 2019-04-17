@@ -85,6 +85,17 @@ export default class Lineadiretta extends Component {
             </TouchableOpacity>
         </View>
 
+        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+
+        <TouchableOpacity
+                                style={{marginHorizontal:'5%', marginTop:10,paddingTop:10,paddingBottom:10, flex:1,
+                                backgroundColor:'transparent',borderRadius:100, borderWidth: 1,borderColor: '#9A2C45', marginBottom:'10%'}}
+                                onPress={() => console.log('invia')}
+                        >
+                            <Text style={{textAlign:'center', paddingHorizontal:10, color:'#9A2C45'}}>Invia</Text>
+                </TouchableOpacity>
+        </View>
+
           </View>
 
           </View>
