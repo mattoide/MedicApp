@@ -28,11 +28,8 @@ export default class Login extends Component {
         super(props);
 
         this.state = {
-        //    email: 'a@a.it',
-        //    password: '1111',
-
-            email: '_',
-            password: '_',
+            email: '', 
+            password: '',
             fetchTimeoutTime: 10000,
             caricamento: false,
             spinner: '',
@@ -51,10 +48,13 @@ export default class Login extends Component {
  
     render() {
         let caricamento = this.isLoading();
+        let disab;
+        if(caricamento != null)
+            disab = 'none';
 
         return (
             
-          <View style={style.mainView} pointerEvents={this.state.disableView} >
+          <View style={style.mainView} pointerEvents={disab} >
            
  {/* <DrawerButton/> */}
              
@@ -113,19 +113,18 @@ export default class Login extends Component {
 
       login() {
 
-        this.caricamento(true);
-
         var params = {
             email: this.state.email,
             password: this.state.password,
         };
      
+
         var formData = new FormData();
-        
+
         for (var k in params) {
             formData.append(k, params[k]);
         }
-        
+
         var request = {
             method: 'POST',
            // headers: headers,
@@ -163,11 +162,23 @@ export default class Login extends Component {
                         break;
     
                     default:
-                    
+
                     response.json()
                             .then((responseJson) => {
-                                ToastAndroid.showWithGravity(responseJson, ToastAndroid.SHORT, ToastAndroid.BOTTOM)
-                            });
+
+                                if(responseJson.email && !responseJson.password)
+                                    ToastAndroid.showWithGravity(responseJson.email[0], ToastAndroid.SHORT, ToastAndroid.BOTTOM)
+
+                                else if(responseJson.password && !responseJson.email)
+                                    ToastAndroid.showWithGravity(responseJson.password[0], ToastAndroid.SHORT, ToastAndroid.BOTTOM)
+
+                                else if(responseJson.email && responseJson.password)
+                                    ToastAndroid.showWithGravity(responseJson.email[0] + ' ' + responseJson.password[0], ToastAndroid.SHORT, ToastAndroid.BOTTOM)
+                                
+                                else
+                                    ToastAndroid.showWithGravity(responseJson, ToastAndroid.SHORT, ToastAndroid.BOTTOM)
+
+                                });
 
                         this.caricamento(false); 
                                     
@@ -177,8 +188,8 @@ export default class Login extends Component {
     
     
             }).catch((error) => {
-                // this.showTimeoutError(error)
                 console.log(error)
+                
                 this.caricamento(false); 
 
                 if(typeof error == 'string')
@@ -188,16 +199,6 @@ export default class Login extends Component {
 
         
             });
-
-    }
-
-    caricamento(pCaricamento){
-
-        this.setState({caricamento:pCaricamento});
-        if(pCaricamento == 'false')
-            this.setState({disableView: 'auto'})
-        else if(pCaricamento == 'true')
-            this.setState({disableView:'none'});
 
     }
 
