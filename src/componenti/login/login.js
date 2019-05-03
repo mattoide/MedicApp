@@ -19,8 +19,8 @@ var fetchTimeout = require('fetch-timeout');
 
 
 
-export const loginUrl = 'http://appdev.novus.cc:8000/api/login';
-// export const loginUrl = 'http://192.168.1.33:8000/api/login';  
+//export const loginUrl = 'http://appdev.novus.cc:8000/api/login';
+ export const loginUrl = 'http://192.168.0.101:8000/api/login';  
 
 export default class Login extends Component {
 
@@ -28,8 +28,10 @@ export default class Login extends Component {
         super(props);
 
         this.state = {
-            email: '', 
-            password: '',
+            email: 'a@a.it', 
+            password: '1111',
+            // email: '', 
+            // password: '',
             fetchTimeoutTime: 10000,
             caricamento: false,
             spinner: '',
@@ -113,6 +115,8 @@ export default class Login extends Component {
 
       login() {
 
+        this.setState({caricamento:true})
+
         var params = {
             email: this.state.email,
             password: this.state.password,
@@ -151,7 +155,7 @@ export default class Login extends Component {
                                         this.props.navigation.navigate('Dashboard');
                                      
 
-                                     this.caricamento(false);
+                                        this.setState({caricamento:false})
 
                                    
                                 });                              
@@ -180,7 +184,7 @@ export default class Login extends Component {
 
                                 });
 
-                        this.caricamento(false); 
+                                this.setState({caricamento:false})
                                     
                         break; 
                         
@@ -190,7 +194,7 @@ export default class Login extends Component {
             }).catch((error) => {
                 console.log(error)
                 
-                this.caricamento(false); 
+                this.setState({caricamento:false})
 
                 if(typeof error == 'string')
                     ToastAndroid.showWithGravity(error, ToastAndroid.SHORT, ToastAndroid.BOTTOM)
