@@ -8,7 +8,8 @@ import {
     TouchableOpacity,
     ScrollView,
     Modal,
-    TouchableHighlight 
+    TouchableHighlight,
+    ToastAndroid
   } from 'react-native';
 
 import {getStoredUser} from '../utils/storage';
@@ -93,12 +94,23 @@ console.log(p)
 
           this.setState({xc:xc});
 
-          getStoredUser((val, err) => {                                         
+
+           getStoredUser((val, err) => {                                         
             if(err)
                 console.log(err)
-            else if(val)
-                this.setState({user: JSON.parse(val)}) 
-        });        }
+            else if(val){
+               this.setState({user: JSON.parse(val)}) 
+
+               if(this.state.user.attivo == 0){
+                ToastAndroid.showWithGravity('L\' app non è ancora attiva per questo profilo', ToastAndroid.SHORT, ToastAndroid.BOTTOM)
+                this.props.navigation.navigate('Informazioni')
+              }
+            }
+        });
+
+
+      
+      }
       );
 
           await getStoredUser((val, err) => {                                         
@@ -107,6 +119,10 @@ console.log(p)
             else if(val)
                 this.setState({user: JSON.parse(val)}) 
         });
+        if(this.state.user.attivo == 0){
+          ToastAndroid.showWithGravity('L\' app non è ancora attiva per questo profilo', ToastAndroid.SHORT, ToastAndroid.BOTTOM)
+          this.props.navigation.navigate('Informazioni')
+        }
     }
 
     setModalVisible(visible) {

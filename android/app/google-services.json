@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "345627444162",
+    "firebase_url": "https://medicapp-0000.firebaseio.com",
+    "project_id": "medicapp-0000",
+    "storage_bucket": "medicapp-0000.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:345627444162:android:4ffdb22b8b18c3a6",
+        "android_client_info": {
+          "package_name": "com.medicapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "345627444162-935k7c5lme8ncdu32t0dva1la09gmeod.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvTTkEA4Gfk62mS5SCS92xZxUU26YrRuA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "345627444162-935k7c5lme8ncdu32t0dva1la09gmeod.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

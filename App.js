@@ -5,7 +5,8 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
-  Text
+  Text,
+  ToastAndroid
 } from 'react-native';
 
 import {
@@ -27,7 +28,18 @@ import Classifica from './src/componenti/classifica/classifica';
 import Informazioni from './src/componenti/informazioni/informazioni';
 import Autodiagnosi from './src/componenti/autodiagnosi/autodiagnosi';
 
+import firebase from 'react-native-firebase';
 
+console.disableYellowBox = true;
+
+
+// let notificationListener = firebase.notifications().onNotification((notification) => {
+// console.log(notification)
+// });
+
+// this.messageListener = firebase.messaging().onMessage((message) => {
+//   console.log(message)
+// });
 
 const CustomDrawerContentComponent = (props) => (
   // <View style={{flex:1}}>

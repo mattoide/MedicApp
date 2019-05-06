@@ -4,7 +4,7 @@ import React, {
 
 import {
     View,
-    Text} from 'react-native';
+    ToastAndroid} from 'react-native';
 
 import {getStoredUser} from '../utils/storage';
 
@@ -41,12 +41,40 @@ export default class Classifica extends Component {
 
     async componentDidMount(){
 
+      this.props.navigation.addListener(
+        'willFocus',
+        () => {
+
+           getStoredUser((val, err) => {                                         
+            if(err)
+                console.log(err)
+            else if(val){
+               this.setState({user: JSON.parse(val)}) 
+
+               if(this.state.user.attivo == 0){
+                ToastAndroid.showWithGravity('L\' app non è ancora attiva per questo profilo', ToastAndroid.SHORT, ToastAndroid.BOTTOM)
+                this.props.navigation.navigate('Informazioni')
+              }
+            }
+        });    
+        
+        }
+      );
+
           await getStoredUser((val, err) => {                                         
             if(err)
                 console.log(err)
             else if(val)
                 this.setState({user: JSON.parse(val)}) 
         });
+
+
+
+        if(this.state.user.attivo == 0){
+          ToastAndroid.showWithGravity('L\' app non è ancora attiva per questo profilo', ToastAndroid.SHORT, ToastAndroid.BOTTOM)
+          this.props.navigation.navigate('Informazioni')
+        }
+               
     }
 
     render() {

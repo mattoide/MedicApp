@@ -10,6 +10,7 @@
     "fetch-timeout": "0.0.2",
     "react": "16.6.3",
     "react-native": "0.58.3",
+    "react-native-firebase": "^5.3.1",
     "react-native-gesture-handler": "^1.0.15",
     "react-native-progress": "^3.6.0",
     "react-native-side-menu": "^1.1.3",
