@@ -26,11 +26,11 @@ var fetchTimeout = require('fetch-timeout');
 
 
 
-export const loginUrl = 'http://appdev.novus.cc:8000/api/login';
-// export const loginUrl = 'http://192.168.137.1:8000/api/login';  
+// export const loginUrl = 'http://appdev.novus.cc:8000/api/login';
+export const loginUrl = 'http://192.168.137.1:8000/api/login';  
 
-export const firebasetokenurl = 'http://appdev.novus.cc:8000/api/firebasetoken';
-// export const firebasetokenurl = 'http://192.168.137.1:8000/api/firebasetoken';
+// export const firebasetokenurl = 'http://appdev.novus.cc:8000/api/firebasetoken';
+export const firebasetokenurl = 'http://192.168.137.1:8000/api/firebasetoken';
 
 
 export default class Login extends Component {
@@ -237,7 +237,7 @@ export default class Login extends Component {
         return fetchTimeout(loginUrl, request, this.state.fetchTimeoutTime, "Il server non risponde")
     
             .then((response) => {
-
+console.log(response)
                 switch (response.status) {
                     case 200:
                         response.json()

@@ -28,6 +28,9 @@ import Classifica from './src/componenti/classifica/classifica';
 import Informazioni from './src/componenti/informazioni/informazioni';
 import Autodiagnosi from './src/componenti/autodiagnosi/autodiagnosi';
 
+
+import Wizard from './src/componenti/wizard/wizard';
+
 import firebase from 'react-native-firebase';
 
 console.disableYellowBox = true;
@@ -86,6 +89,9 @@ const CustomDrawerContentComponent = (props) => (
         },
         Autodiagnosi: {
           screen: Autodiagnosi,
+        },        
+        Wizard: {
+          screen: Wizard,
         },
         
         

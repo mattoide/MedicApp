@@ -29,6 +29,10 @@ import IconFontAwsome from 'react-native-vector-icons/FontAwesome5';
 
 import * as Progress from 'react-native-progress';
 
+import StepTempo from "../wizard/steps/StepTempo";
+import StepRip from "../wizard/steps/StepRip";
+import StepInt from "../wizard/steps/StepInt";
+
 export default class Riablitazione extends Component {
 
     constructor(props) {
@@ -70,6 +74,59 @@ export default class Riablitazione extends Component {
       
     };
 
+    goSteps(){
+
+      if(!this.state.user.esercizi || this.state.user.esercizi.length <= 0){
+        ToastAndroid.showWithGravity('Non ci sono esecizi da fare', ToastAndroid.SHORT, ToastAndroid.BOTTOM)
+        return;
+      }
+
+      this.setModalVisible(false);
+      var steps = [];
+           this.state.user.esercizi.forEach(element => {
+              if(element.tipoesercizio == 'tempo'){
+                  let a = {
+                   component: StepTempo,
+                   props    : {
+                     descrizione: element.nome,
+                     immagine: element.immagine
+
+             
+                   }
+                  }
+                  steps.push(a);
+              }
+              
+
+              if(element.tipoesercizio == 'ripetizioni'){
+               let a = {
+                component: StepRip,
+                props    : {
+                  descrizione: element.nome,
+                  immagine: element.immagine
+          
+                }
+               }
+               steps.push(a);
+           }
+
+           if(element.tipoesercizio == 'interattivi'){
+            let a = {
+             component: StepInt,
+             props    : {
+               descrizione: element.nome,
+               immagine: element.immagine
+       
+             }
+            }
+            steps.push(a);
+        }
+
+          });
+      this.props.navigation.navigate('Wizard', {steps: steps});
+
+    }
+
     async componentDidMount(){
 
 
@@ -79,7 +136,6 @@ export default class Riablitazione extends Component {
         'willFocus',
         (p) => {
 
-console.log(p)
 
           let xc = 0;
           this.state.esercizi.forEach(element => {
@@ -178,9 +234,7 @@ return (
           animationType="fade" 
           transparent={true} 
           visible={this.state.modalVisible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-          }}>
+          >
           <View style={{flex:1, width:'100%', justifyContent:'center', backgroundColor:'black', opacity:0.8}}> 
           
           <View style={{flex:0.2, borderRadius:5, borderWidth:1, marginHorizontal:'10%', borderColor:'#333333'}}>
@@ -205,6 +259,7 @@ return (
               <TouchableHighlight
                 onPress={() => {
                   console.log('ok')
+                  this.goSteps();
                 }}>
                 <Text style={{fontSize:20, color:'#988C6C', textAlign:'center'}}>Ok</Text>
               </TouchableHighlight>
