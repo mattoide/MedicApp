@@ -15,10 +15,10 @@ import {
   DrawerItems, SafeAreaView
 } from 'react-navigation';
 
+import ImpostazioniC from './src/componenti/utils/settings';
 import Logout from './src/componenti/utils/logout';
 import AutodiagnosiC from './src/componenti/utils/autodiagnosi';
 import UserHeader from './src/componenti/userheaderdrawer/userheaderdrawer';
-
 
 import Login from './src/componenti/login/login';
 import Dashboard from './src/componenti/dashboard/dashboard';
@@ -27,6 +27,7 @@ import Riabilitazione from './src/componenti/riabilitazione/riabilitazione';
 import Classifica from './src/componenti/classifica/classifica';
 import Informazioni from './src/componenti/informazioni/informazioni';
 import Autodiagnosi from './src/componenti/autodiagnosi/autodiagnosi';
+import Impostazioni from './src/componenti/impostazioni/impostazioni';
 
 
 import Wizard from './src/componenti/wizard/wizard';
@@ -34,6 +35,7 @@ import Wizard from './src/componenti/wizard/wizard';
 import firebase from 'react-native-firebase';
 
 console.disableYellowBox = true;
+
 
 
 // let notificationListener = firebase.notifications().onNotification((notification) => {
@@ -45,25 +47,20 @@ console.disableYellowBox = true;
 // });
 
 const CustomDrawerContentComponent = (props) => (
-  // <View style={{flex:1}}>
+  
   <ScrollView> 
     <SafeAreaView style={{flex:1,alignSelf:'center'}} forceInset={{ top: 'always', horizontal: 'never' }}>
 
-      <UserHeader a={'aasasa'}/>
+      <UserHeader/>
       <DrawerItems {...props} />
 
       <View style={{flex:1, justifyContent:'flex-end', }}> 
-
-      <AutodiagnosiC/>
-      <Logout/>
-
-
+        <AutodiagnosiC/>
+        <Logout/>
       </View>
-      
           
     </SafeAreaView>
-    </ScrollView>
-  // </View>
+  </ScrollView>
 );
 
   
@@ -89,6 +86,9 @@ const CustomDrawerContentComponent = (props) => (
         },
         Autodiagnosi: {
           screen: Autodiagnosi,
+        },          
+        Impostazioni: {
+          screen: Impostazioni,
         },        
         Wizard: {
           screen: Wizard,
@@ -100,7 +100,7 @@ const CustomDrawerContentComponent = (props) => (
 
       },
       drawerBackgroundColor:'#363636',
-      initialRouteName:'Login',
+      initialRouteName:'Impostazioni',
       contentComponent: CustomDrawerContentComponent,
       contentOptions:{
       //  activeBackgroundColor:'#988C6C',

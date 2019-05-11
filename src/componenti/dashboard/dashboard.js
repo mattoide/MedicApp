@@ -26,6 +26,7 @@ import ModalReminder from '../utils/modalreminder';
 
 import firebase from 'react-native-firebase';
 
+import {setSetting, getSetting} from '../utils/settings';
 
 
 export class Passi extends Component{
@@ -143,6 +144,8 @@ export default class Dashboard extends Component {
           ToastAndroid.showWithGravity('L\' app non è ancora attiva per questo profilo', ToastAndroid.SHORT, ToastAndroid.BOTTOM)
           this.props.navigation.navigate('Informazioni')
         }
+
+
 
     }
       

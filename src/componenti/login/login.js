@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 
 import Caricamento from '../loading/caricamento';
-import {storeUser} from '../utils/storage';
+import {storeUser, getStoredUser, removeUser} from '../utils/storage';
 
 import DrawerButton from '../utils/drawerbutton';
 
@@ -26,10 +26,11 @@ var fetchTimeout = require('fetch-timeout');
 
 
 
-// export const loginUrl = 'http://appdev.novus.cc:8000/api/login';
-export const loginUrl = 'http://192.168.137.1:8000/api/login';  
-
+// export const loginUrl = 'http://appdev.novus.cc:8000/api/login';  
 // export const firebasetokenurl = 'http://appdev.novus.cc:8000/api/firebasetoken';
+
+
+export const loginUrl = 'http://192.168.137.1:8000/api/login';  
 export const firebasetokenurl = 'http://192.168.137.1:8000/api/firebasetoken';
 
 
@@ -39,10 +40,10 @@ export default class Login extends Component {
         super(props);
 
         this.state = {
-            // email: 'a@a.it', 
-            // password: '1111',
-            email: '', 
-            password: '',
+            email: 'a@a.it', 
+            password: '1111',
+            // email: '', 
+            // password: '',
             fetchTimeoutTime: 10000,
             caricamento: false,
             spinner: '',
@@ -56,7 +57,7 @@ export default class Login extends Component {
 
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         let notificationDisplayedListener = firebase.notifications().onNotificationDisplayed((notification) => {
 
         });
@@ -74,8 +75,23 @@ export default class Login extends Component {
                 .android.setPriority(firebase.notifications.Android.Priority.High);
                             firebase.notifications().displayNotification(mnotification)
         });
-
         
+        getStoredUser((val, err) => {                                         
+            if(err)
+                console.log(err)
+            else if(val){
+               this.setState({user: JSON.parse(val)}) 
+               if(this.state.user.attivo == 0){
+                removeUser((err) => {     
+                    if(err)
+                        console.log(err)
+                    
+                });
+               }
+           else    
+               this.props.navigation.navigate('Dashboard');
+            }
+        });
     }
     
     componentWillUnmount() {

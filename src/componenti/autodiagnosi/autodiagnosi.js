@@ -16,7 +16,7 @@ import DrawerButton from '../utils/drawerbutton';
 
 
 
-export default class Classifica extends Component {
+export default class Autodiagnosi extends Component {
 
     constructor(props) {
         super(props);
