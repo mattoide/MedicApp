@@ -100,7 +100,7 @@ const CustomDrawerContentComponent = (props) => (
 
       },
       drawerBackgroundColor:'#363636',
-      initialRouteName:'Impostazioni',
+      initialRouteName:'Login',
       contentComponent: CustomDrawerContentComponent,
       contentOptions:{
       //  activeBackgroundColor:'#988C6C',

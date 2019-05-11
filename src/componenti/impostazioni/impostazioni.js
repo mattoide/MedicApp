@@ -21,6 +21,11 @@ import {setSetting, getSetting} from '../utils/settings';
 
 import DrawerButton from '../utils/drawerbutton';
 
+import BackgroundTimer from 'react-native-background-timer';
+
+import firebase from 'react-native-firebase';
+
+
 
 
 export default class Impostazioni extends Component {
@@ -41,12 +46,157 @@ export default class Impostazioni extends Component {
     }
 
    async componentWillMount(){
+
+    // Build a channel
+const channel = new firebase.notifications.Android.Channel('remichannel', 'remichannel', firebase.notifications.Android.Importance.Max)
+.setDescription('remichannel');
+// Create the channel
+firebase.notifications().android.createChannel(channel);
+
       await getSetting('medicOra1', (val, err) => { if(val){ this.setState({medicora1:val}) } else {console.log('err')}});
       await getSetting('medicOra2', (val, err) => { if(val){ this.setState({medicora2:val}) } else {console.log('err')}});
       await getSetting('medicOra3', (val, err) => { if(val){ this.setState({medicora3:val}) } else {console.log('err')}});
 
       await getSetting('eserOra1', (val, err) => { if(val){ this.setState({eserora1:val}) } else {console.log('err')}});
       await getSetting('eserOra2', (val, err) => { if(val){ this.setState({eserora2:val}) } else {console.log('err')}});
+    }
+
+noti(){
+
+  console.log('primanot') 
+
+  let mnotification = new firebase.notifications.Notification({show_in_foreground: true})
+  .setNotificationId('nitId')
+  .setTitle('notification.title')
+  .setBody('notification.body')
+  .android.setChannelId('remichannel')
+  .android.setSmallIcon('ic_launcher')
+  .android.setPriority(firebase.notifications.Android.Priority.High);
+
+  console.log(mnotification) 
+
+              firebase.notifications().displayNotification(mnotification)
+
+console.log('doponot') 
+}
+
+    startNoti(tipo, date){
+      var now = new Date().getTime();
+      var noti = date.getTime();
+
+      if(now < noti){
+        start = noti - now;
+      } else {
+        start = 86400000 -(now - noti);
+      }
+
+      switch(tipo){
+
+        
+        case 'medicora1':
+
+        try{
+
+          BackgroundTimer.clearTimeout(medicora1TimeOut);
+          BackgroundTimer.clearInterval(medicora1Interval);
+
+        } catch(e){
+
+                medicora1TimeOut = BackgroundTimer.setTimeout(() => {
+
+                  this.noti();
+
+                  medicora1Interval = BackgroundTimer.setInterval(() => { this.noti();  }, 86400000);
+
+                }, start);
+        }
+
+        break;
+
+        case 'medicora2':
+
+        try{
+
+          BackgroundTimer.clearTimeout(medicora2TimeOut);
+          BackgroundTimer.clearInterval(medicora2Interval);
+
+        } catch(e){
+
+                medicora2TimeOut = BackgroundTimer.setTimeout(() => {
+
+                  this.noti();
+
+                  medicora2Interval = BackgroundTimer.setInterval(() => { this.noti();  }, 86400000);
+                 
+                }, start);
+        }
+
+       
+        break;
+
+        case 'medicora3':
+       
+        try{
+
+          BackgroundTimer.clearTimeout(medicora3TimeOut);
+          BackgroundTimer.clearInterval(medicora3Interval);
+
+        } catch(e){
+
+                medicora3TimeOut = BackgroundTimer.setTimeout(() => {
+
+                  this.noti();
+                  
+                  medicora3Interval = BackgroundTimer.setInterval(() => { this.noti();  }, 86400000);
+                 
+                }, start);
+        }
+
+        break;
+
+        case 'eserora1':
+        try{
+
+          BackgroundTimer.clearTimeout(eserora1TimeOut);
+          BackgroundTimer.clearInterval(eserora1Interval);
+
+        } catch(e){
+
+                  eserora1TimeOut = BackgroundTimer.setTimeout(() => {
+
+                  this.noti();
+                  
+                  eserora1Interval = BackgroundTimer.setInterval(() => { this.noti();  }, 86400000);
+                 
+                }, start);
+        }
+
+       
+        break;
+
+        case 'eserora2':
+       
+        try{
+
+          BackgroundTimer.clearTimeout(eserora2TimeOut);
+          BackgroundTimer.clearInterval(eserora2Interval);
+
+        } catch(e){
+
+                  eserora2TimeOut = BackgroundTimer.setTimeout(() => {
+
+                  this.noti();
+                  
+                  eserora2Interval = BackgroundTimer.setInterval(() => { this.noti();  }, 86400000);
+                 
+                }, start);
+        }
+
+        break;
+
+      }
+
+
     }
 
     showDateTimePicker = (tipo) => {
@@ -64,33 +214,38 @@ export default class Impostazioni extends Component {
       hour = time.split(':')[0] + ":" + time.split(':')[1]
 
 
-
-
       switch(this.state.tipo){
         case 'medicora1':
         this.setState({medicora1:hour})
         await setSetting('medicOra1', hour, (err) => { if(err){ console.log(err) } else { console.log('kei salvata') } }); 
+        this.startNoti('medicora1',date);
         break;
 
         case 'medicora2':
         this.setState({medicora2:hour})
         await setSetting('medicOra2', hour, (err) => { if(err){ console.log(err) } else { console.log('kei salvata') } }); 
+        this.startNoti('medicora2',date);
         break;
 
         case 'medicora3':
         this.setState({medicora3:hour})
         await setSetting('medicOra3', hour, (err) => { if(err){ console.log(err) } else { console.log('kei salvata') } }); 
+        this.startNoti('medicora3',date);
         break;
 
         case 'eserora1':
         this.setState({eserora1:hour})
-        await setSetting('eserOra1', hour, (err) => { if(err){ console.log(err) } else { console.log('kei salvata') } }); 
+        await setSetting('eserora1', hour, (err) => { if(err){ console.log(err) } else { console.log('kei salvata') } }); 
+        this.startNoti('eserora1',date);
         break;
 
         case 'eserora2':
         this.setState({eserora2:hour})
         await setSetting('eserOra2', hour, (err) => { if(err){ console.log(err) } else { console.log('kei salvata') } });
+        this.startNoti('eserora2',date);
         break;
+
+
       }
 
       this.hideDateTimePicker();

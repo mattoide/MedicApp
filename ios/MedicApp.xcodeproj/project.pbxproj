@@ -60,6 +60,7 @@
 		A963C1C3AFC24EC7AD844EBB /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 133FE67D801740F5A3553390 /* libRNFirebase.a */; };
 		300D5FC7A9574418A1A20169 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CA0B9FE06714564827D5478 /* libRNImagePicker.a */; };
 		048EF5EC471B4C939C111B73 /* libRNCAsyncStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD6A1A6071F4D819C3AF5FA /* libRNCAsyncStorage.a */; };
+		324D1CF37EF24D40A95C1881 /* libRNBackgroundTimer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 088B857A98D743C8975DEC12 /* libRNBackgroundTimer.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -393,6 +394,8 @@
 		1CA0B9FE06714564827D5478 /* libRNImagePicker.a */ = {isa = PBXFileReference; name = "libRNImagePicker.a"; path = "libRNImagePicker.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		66D21B0D1A034512BC8F1637 /* RNCAsyncStorage.xcodeproj */ = {isa = PBXFileReference; name = "RNCAsyncStorage.xcodeproj"; path = "../node_modules/@react-native-community/async-storage/ios/RNCAsyncStorage.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		5DD6A1A6071F4D819C3AF5FA /* libRNCAsyncStorage.a */ = {isa = PBXFileReference; name = "libRNCAsyncStorage.a"; path = "libRNCAsyncStorage.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		A8C4605B9AD547678F43A597 /* RNBackgroundTimer.xcodeproj */ = {isa = PBXFileReference; name = "RNBackgroundTimer.xcodeproj"; path = "../node_modules/react-native-background-timer/ios/RNBackgroundTimer.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		088B857A98D743C8975DEC12 /* libRNBackgroundTimer.a */ = {isa = PBXFileReference; name = "libRNBackgroundTimer.a"; path = "libRNBackgroundTimer.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -426,6 +429,7 @@
 				A963C1C3AFC24EC7AD844EBB /* libRNFirebase.a in Frameworks */,
 				300D5FC7A9574418A1A20169 /* libRNImagePicker.a in Frameworks */,
 				048EF5EC471B4C939C111B73 /* libRNCAsyncStorage.a in Frameworks */,
+				324D1CF37EF24D40A95C1881 /* libRNBackgroundTimer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -621,6 +625,7 @@
 				77438F110E164C7FADBEBEDC /* RNFirebase.xcodeproj */,
 				156D24DEA64F4966B9246D93 /* RNImagePicker.xcodeproj */,
 				66D21B0D1A034512BC8F1637 /* RNCAsyncStorage.xcodeproj */,
+				A8C4605B9AD547678F43A597 /* RNBackgroundTimer.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1293,6 +1298,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1301,6 +1307,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-firebase\ios\RNFirebase/**",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
 				);
 			};
 			name = Debug;
@@ -1328,6 +1335,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1336,6 +1344,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-firebase\ios\RNFirebase/**",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
 				);
 			};
 			name = Release;
@@ -1363,6 +1372,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-firebase\ios\RNFirebase/**",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
 				);
 			};
 			name = Debug;
@@ -1389,6 +1399,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-firebase\ios\RNFirebase/**",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
 				);
 			};
 			name = Release;
@@ -1424,6 +1435,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1432,6 +1444,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-firebase\ios\RNFirebase/**",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
 				);
 			};
 			name = Debug;
@@ -1467,6 +1480,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1475,6 +1489,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-firebase\ios\RNFirebase/**",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
 				);
 			};
 			name = Release;
@@ -1509,6 +1524,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1517,6 +1533,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-firebase\ios\RNFirebase/**",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
 				);
 			};
 			name = Debug;
@@ -1551,6 +1568,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1559,6 +1577,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-firebase\ios\RNFirebase/**",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+					"$(SRCROOT)\..\node_modules\react-native-background-timer\ios",
 				);
 			};
 			name = Release;
