@@ -100,6 +100,14 @@ console.log('doponot')
           BackgroundTimer.clearTimeout(medicora1TimeOut);
           BackgroundTimer.clearInterval(medicora1Interval);
 
+          medicora1TimeOut = BackgroundTimer.setTimeout(() => {
+
+            this.noti();
+
+            medicora1Interval = BackgroundTimer.setInterval(() => { this.noti();  }, 86400000);
+
+          }, start);
+
         } catch(e){
 
                 medicora1TimeOut = BackgroundTimer.setTimeout(() => {
@@ -119,6 +127,14 @@ console.log('doponot')
 
           BackgroundTimer.clearTimeout(medicora2TimeOut);
           BackgroundTimer.clearInterval(medicora2Interval);
+
+          medicora2TimeOut = BackgroundTimer.setTimeout(() => {
+
+            this.noti();
+
+            medicora2Interval = BackgroundTimer.setInterval(() => { this.noti();  }, 86400000);
+           
+          }, start);
 
         } catch(e){
 
@@ -141,6 +157,14 @@ console.log('doponot')
           BackgroundTimer.clearTimeout(medicora3TimeOut);
           BackgroundTimer.clearInterval(medicora3Interval);
 
+          medicora3TimeOut = BackgroundTimer.setTimeout(() => {
+
+            this.noti();
+            
+            medicora3Interval = BackgroundTimer.setInterval(() => { this.noti();  }, 86400000);
+           
+          }, start);
+
         } catch(e){
 
                 medicora3TimeOut = BackgroundTimer.setTimeout(() => {
@@ -159,6 +183,15 @@ console.log('doponot')
 
           BackgroundTimer.clearTimeout(eserora1TimeOut);
           BackgroundTimer.clearInterval(eserora1Interval);
+
+          
+          eserora1TimeOut = BackgroundTimer.setTimeout(() => {
+
+            this.noti();
+            
+            eserora1Interval = BackgroundTimer.setInterval(() => { this.noti();  }, 86400000);
+           
+          }, start);
 
         } catch(e){
 
@@ -180,6 +213,15 @@ console.log('doponot')
 
           BackgroundTimer.clearTimeout(eserora2TimeOut);
           BackgroundTimer.clearInterval(eserora2Interval);
+
+          
+          eserora2TimeOut = BackgroundTimer.setTimeout(() => {
+
+            this.noti();
+            
+            eserora2Interval = BackgroundTimer.setInterval(() => { this.noti();  }, 86400000);
+           
+          }, start);
 
         } catch(e){
 
