@@ -6,7 +6,9 @@ import {
     View,
     Text,
   TouchableOpacity,
-  ToastAndroid
+  TouchableHighlight,
+  ToastAndroid,
+  Modal
   } from 'react-native';
 
 
@@ -18,18 +20,18 @@ import DrawerButton from '../utils/drawerbutton';
 import Wizard from "react-native-wizard";
 import Risposta from "./risposta";
 
-const dagnosi = ["Alluce valgo", "Alluce rigido", "Dito a martello", "Piede piatto", "Sintattilia", "Allungamento", "Accorciamento", "Haglund", "Spina", "Metatarsalagia", "Morton", "5 dito varo", "Brachimetatarsia"];
 
 
-const steps =[
+
+// const steps =[
       
-  {component: Risposta, props : {domanda: 0}},
-  {component: Risposta, props : {domanda: 1}},
-  {component: Risposta, props : {domanda: 2}},
-  {component: Risposta, props : {domanda: 3}},
-  {component: Risposta, props : {domanda: 4}},
+//   {component: Risposta, props : {domanda: 0}},
+//   {component: Risposta, props : {domanda: 1}},
+//   {component: Risposta, props : {domanda: 2}},
+//   {component: Risposta, props : {domanda: 3}},
+//   {component: Risposta, props : {domanda: 4}},
 
-]
+// ]
 
 
 
@@ -38,18 +40,34 @@ export default class Autodiagnosi extends Component {
     constructor(props) {
         super(props);
 
+        this.setDisbld = this.setDisbld.bind(this);
+        this.setDiagns = this.setDiagns.bind(this);
+        
+
+
         this.state = {
           user:{},
-          steps: [],
           isLastStep:'',
           isFirstStep:'',
-          currentIndex:''
+          currentIndex:'',
+          disabled:true,
+          diagnosi:'',
+          modalVisible:false
                 };
  
     }
 
- 
+    setDisbld(){
+      this.setState({disabled:false})
+    }
 
+    
+    setDiagns(diagns){
+      this.setState({diagnosi:diagns})
+    }
+
+
+    
     static navigationOptions = {
       drawerLabel: () => null     
     };
@@ -60,7 +78,17 @@ export default class Autodiagnosi extends Component {
 
     render() {
 
-        return (
+      steps = [
+      
+        {component: Risposta, props : {domanda: 0, setDisabled:this.setDisbld, setDiagnosi:this.setDiagns}},
+        {component: Risposta, props : {domanda: 1, setDisabled:this.setDisbld, setDiagnosi:this.setDiagns}},
+        {component: Risposta, props : {domanda: 2, setDisabled:this.setDisbld, setDiagnosi:this.setDiagns}},
+        {component: Risposta, props : {domanda: 3, setDisabled:this.setDisbld, setDiagnosi:this.setDiagns}},
+        {component: Risposta, props : {domanda: 4, setDisabled:this.setDisbld, setDiagnosi:this.setDiagns}},
+      
+      ]
+
+      return (
           <View style={style.mainView}>
 <DrawerButton/>
 
@@ -82,12 +110,13 @@ export default class Autodiagnosi extends Component {
          steps={steps}
 
         duration={500}
-              // onNext={() => {console.log("Next page called")}}
-              // onPrev={() => {console.log("Prev page called")}}
+               onNext={() => {this.setState({disabled:true})}}
+               onPrev={() => {this.setState({disabled:false})}}
               onFinish={() => {
-                 ToastAndroid.showWithGravity('Congratulazioni! Hai completato tutti gli esercizi.', ToastAndroid.SHORT, ToastAndroid.BOTTOM)
+                 //ToastAndroid.showWithGravity('Congratulazioni! Hai completato tutti gli esercizi.', ToastAndroid.SHORT, ToastAndroid.BOTTOM)
+                this.setState({modalVisible:true})
                  this.wizard.goToStep(0)	
-                this.props.navigation.navigate('Riabilitazione')}
+                this.props.navigation.navigate('Informazioni')}
               }
     /> 
   
@@ -102,15 +131,74 @@ export default class Autodiagnosi extends Component {
         <Text style={{textAlign:'center', fontSize:20, color:'#988C6C'}}> Indietro</Text>
         </TouchableOpacity> : undefined}
 
-        <TouchableOpacity 
-        style={{marginHorizontal:'5%', marginTop:10,paddingTop:10,paddingBottom:10, flex:1,
-        backgroundColor:'transparent',borderRadius:100, borderWidth: 1,borderColor: '#9A2C45', marginBottom:'10%'}}
-        onPress={()=>{
-            this.wizard.next()
-          }}>
-            <Text style={{textAlign:'center', fontSize:20, color:'#9A2C45'}}> Continua</Text>
-            </TouchableOpacity>
 
+        <TouchableOpacity 
+                                                style={{marginHorizontal:'5%', marginTop:10,paddingTop:10,paddingBottom:10, flex:1,
+                                                backgroundColor:'transparent',borderRadius:100, borderWidth: 1,borderColor: '#9A2C45', marginBottom:'10%'}}
+                                                onPress={()=>{
+                                                    this.wizard.next()
+                                                  }}>
+                                                    <Text style={{textAlign:'center', fontSize:20, color:'#9A2C45'}}> Continua</Text>
+                                                    </TouchableOpacity>
+
+{/* 
+        {this.state.disabled ?
+                                            <TouchableOpacity disabled={this.state.disabled}
+                                            style={{marginHorizontal:'5%', marginTop:10,paddingTop:10,paddingBottom:10, flex:1,
+                                            backgroundColor:'transparent', opacity:100, borderRadius:100, borderWidth: 1,borderColor: 'gray', marginBottom:'10%'}}
+                                            onPress={()=>{
+                                                this.wizard.next()
+                                              }}>
+                                                <Text style={{textAlign:'center', fontSize:20, color:'gray'}}> Continua</Text>
+                                                </TouchableOpacity>
+:
+
+                                                <TouchableOpacity disabled={this.state.disabled}
+                                                style={{marginHorizontal:'5%', marginTop:10,paddingTop:10,paddingBottom:10, flex:1,
+                                                backgroundColor:'transparent',borderRadius:100, borderWidth: 1,borderColor: '#9A2C45', marginBottom:'10%'}}
+                                                onPress={()=>{
+                                                    this.wizard.next()
+                                                  }}>
+                                                    <Text style={{textAlign:'center', fontSize:20, color:'#9A2C45'}}> Continua</Text>
+                                                    </TouchableOpacity>
+        } */}
+
+
+<Modal
+          animationType="fade" 
+          transparent={true} 
+          visible={this.state.modalVisible}
+          >
+          <View style={{flex:1, width:'100%', justifyContent:'center', backgroundColor:'black', opacity:0.8}}> 
+          
+          <View style={{flex:0.5, borderRadius:5, borderWidth:1, marginHorizontal:'10%', borderColor:'#333333'}}>
+            <View style={{backgroundColor: '#333333', flex: 1, justifyContent:'center', alignContent:'center', alignItems:'center'}}>
+                <Text style={{fontSize:25, color:'#988C6C', textAlign:'center'}}>La tua diagnosi è: {this.state.diagnosi}</Text> 
+
+                <Text style={{fontSize:25, color:'#9A2C45', textAlign:'center'}}>Quest' autodiagnosi non sostituisce la visita medica. In ogni caso è raccomandabile consultare lo specialista che potrebbe proporti delle ulteriori prove diagnostiche.</Text> 
+
+
+            </View>
+
+        <View style={{backgroundColor:'#303030', flex: 0.3, flexDirection:'row'}}>
+          
+          <View style={{flex:1, justifyContent:'center', alignContent:'center', alignItems:'center'}}>
+
+             <TouchableHighlight
+                onPress={() => {
+                  this.setState({modalVisible:!this.state.modalVisible});
+                }}>
+                <Text style={{fontSize:20, color:'#988C6C', textAlign:'center'}}>Ok</Text>
+              </TouchableHighlight>
+            </View>
+
+            </View>
+
+        </View>
+          </View>
+        </Modal>
+
+       
         </View>
 
           </View>

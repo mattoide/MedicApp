@@ -146,14 +146,14 @@ export default class Riablitazione extends Component {
           // xc = parseFloat((xc / this.state.esercizi.length * 100) * 100).toFixed(2);
            xc = xc / this.state.esercizi.length
 
-          console.log(xc)
+          // console.log(xc)
 
           this.setState({xc:xc});
 
 
            getStoredUser((val, err) => {                                         
             if(err)
-                console.log(err)
+                return //console.log(err)
             else if(val){
                this.setState({user: JSON.parse(val)}) 
 
@@ -171,7 +171,7 @@ export default class Riablitazione extends Component {
 
           await getStoredUser((val, err) => {                                         
             if(err)
-                console.log(err)
+                return //console.log(err)
             else if(val)
                 this.setState({user: JSON.parse(val)}) 
         });
@@ -258,7 +258,6 @@ return (
             <View style={{flex:1, justifyContent:'center', alignContent:'center', alignItems:'center'}}>
               <TouchableHighlight
                 onPress={() => {
-                  console.log('ok')
                   this.goSteps();
                 }}>
                 <Text style={{fontSize:20, color:'#988C6C', textAlign:'center'}}>Ok</Text>
@@ -269,15 +268,6 @@ return (
 
         </View>
 
-            <View>
-
-              <TouchableHighlight
-                onPress={() => {
-                  this.setModalVisible(!this.state.modalVisible);
-                }}>
-                <Text>Hide Modal</Text>
-              </TouchableHighlight>
-            </View>
           </View>
         </Modal>
 

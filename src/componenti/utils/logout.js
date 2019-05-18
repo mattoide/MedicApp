@@ -26,7 +26,7 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons/';
 
             removeUser((err) => {     
                 if(err)
-                    console.log(err)
+                    return //console.log(err)
                  else 
                     this.props.navigation.navigate('Login');
                 

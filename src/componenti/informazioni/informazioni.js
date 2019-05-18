@@ -46,7 +46,7 @@ export default class Informazioni extends Component {
 
           await getStoredUser((val, err) => {                                         
             if(err)
-                console.log(err)
+                return /*console.log(err)*/
             else if(val)
                 this.setState({user: JSON.parse(val)}) 
         });

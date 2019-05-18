@@ -26,12 +26,12 @@ var fetchTimeout = require('fetch-timeout');
 
 
 
-// export const loginUrl = 'http://appdev.novus.cc:8000/api/login';  
-// export const firebasetokenurl = 'http://appdev.novus.cc:8000/api/firebasetoken';
+export const loginUrl = 'http://appdev.novus.cc:8000/api/login';  
+export const firebasetokenurl = 'http://appdev.novus.cc:8000/api/firebasetoken';
 
 
-export const loginUrl = 'http://192.168.178.161:8000/api/login';  
-export const firebasetokenurl = 'http://192.168.178.161:8000/api/firebasetoken';
+// export const loginUrl = 'http://192.168.178.161:8000/api/login';  
+// export const firebasetokenurl = 'http://192.168.178.161:8000/api/firebasetoken';
 
 
 export default class Login extends Component {
@@ -40,10 +40,10 @@ export default class Login extends Component {
         super(props);
 
         this.state = {
-            email: 'a@a.it', 
-            password: '1111',
-            // email: '', 
-            // password: '',
+            // email: 'a@a.it', 
+            // password: '1111',
+            email: '', 
+            password: '',
             fetchTimeoutTime: 10000,
             caricamento: false,
             spinner: '',
@@ -64,7 +64,7 @@ export default class Login extends Component {
         let notificationListener = firebase.notifications().onNotification((notification) => {
             // Process your notification as required
 
-            console.log(notification)
+            /*console.log(notification)*/
 
                 let mnotification = new firebase.notifications.Notification({show_in_foreground: true})
                 .setNotificationId(notification.notificationId)
@@ -78,13 +78,13 @@ export default class Login extends Component {
         
         getStoredUser((val, err) => {                                         
             if(err)
-                console.log(err)
+                return /*console.log(err)*/
             else if(val){
                this.setState({user: JSON.parse(val)}) 
                if(this.state.user.attivo == 0){
                 removeUser((err) => {     
                     if(err)
-                        console.log(err)
+                        return /*console.log(err)*/
                     
                 });
                }
@@ -213,7 +213,7 @@ export default class Login extends Component {
         await storeUser(this.state.user, (err) => {     
                                     
             if(err)
-                console.log(err)
+                return /*console.log(err)*/
              else {
                 this.props.navigation.navigate('Informazioni');
                 this.setState({caricamento:false})
@@ -253,7 +253,7 @@ export default class Login extends Component {
         return fetchTimeout(loginUrl, request, this.state.fetchTimeoutTime, "Il server non risponde")
     
             .then((response) => {
-console.log(response)
+
                 switch (response.status) {
                     case 200:
                         response.json()
@@ -264,7 +264,7 @@ console.log(response)
 
                                 storeUser(this.state.user, (err) => {     
                                     if(err)
-                                        console.log(err)
+                                        return /*console.log(err)*/
                                      else {
                                         // this.props.navigation.navigate('Dashboard');
 
@@ -308,7 +308,7 @@ console.log(response)
     
     
             }).catch((error) => {
-                console.log(error)
+                // console.log(error)
                 
                 this.setState({caricamento:false})
 
@@ -394,7 +394,7 @@ console.log(response)
               
               
                 }).catch((error) => {
-                    console.log(error)
+                    // console.log(error)
                     
                     this.setState({caricamento:false})
               

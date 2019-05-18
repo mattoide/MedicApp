@@ -12,12 +12,10 @@ export default class CustomModal extends Component {
 
 componentWillReceiveProps(){
     this.setModalVisible(this.props.modalVisible);
-    console.log('will') 
 }
 
 componentDidMount(){ 
     this.setModalVisible(false);
-    console.log('did')
 }
 
   setModalVisible(visible) {

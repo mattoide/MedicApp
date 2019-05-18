@@ -95,8 +95,6 @@ export default class Dashboard extends Component {
     async componentDidMount(){
 
       let notificationListener = firebase.notifications().onNotification((notification) => {
-
-        console.log('assas')
         if(this.state.user.attivo == 1){
         this.setState({modalVisible: true, notifica: notification.body})
         }
@@ -111,7 +109,7 @@ export default class Dashboard extends Component {
 
            getStoredUser((val, err) => {                                         
             if(err)
-                console.log(err)
+               return // console.log(err)
             else if(val){
                this.setState({user: JSON.parse(val)}) 
 
@@ -129,7 +127,7 @@ export default class Dashboard extends Component {
 
           await getStoredUser((val, err) => {                                         
             if(err)
-                console.log(err)
+               return // console.log(err)
             else if(val){
                this.setState({user: JSON.parse(val)}) 
 

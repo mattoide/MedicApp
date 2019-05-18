@@ -68,7 +68,6 @@ export default class Wzrd extends Component {
       let steps = this.props.navigation.getParam('steps', '');
       // let steps = this.state.steps;
         //let steps = JSON.parse(stepz);
-        console.log('render')
 let a = 0; 
 return (
             
@@ -84,9 +83,7 @@ return (
                 isFirstStep : isFirstStep,
                 currentIndex: currentIndex
             })
-            console.log(isLastStep)
-            console.log(isFirstStep)
-            console.log(currentIndex)
+           
          }}
         //  steps={stepz}
          steps={steps}

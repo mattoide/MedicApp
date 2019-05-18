@@ -53,17 +53,16 @@ const channel = new firebase.notifications.Android.Channel('remichannel', 'remic
 // Create the channel
 firebase.notifications().android.createChannel(channel);
 
-      await getSetting('medicOra1', (val, err) => { if(val){ this.setState({medicora1:val}) } else {console.log('err')}});
-      await getSetting('medicOra2', (val, err) => { if(val){ this.setState({medicora2:val}) } else {console.log('err')}});
-      await getSetting('medicOra3', (val, err) => { if(val){ this.setState({medicora3:val}) } else {console.log('err')}});
+      await getSetting('medicOra1', (val, err) => { if(val){ this.setState({medicora1:val}) } else {/*console.log(err)*/}});
+      await getSetting('medicOra2', (val, err) => { if(val){ this.setState({medicora2:val}) } else {/*console.log(err)*/}});
+      await getSetting('medicOra3', (val, err) => { if(val){ this.setState({medicora3:val}) } else {/*console.log(err)*/}});
 
-      await getSetting('eserOra1', (val, err) => { if(val){ this.setState({eserora1:val}) } else {console.log('err')}});
-      await getSetting('eserOra2', (val, err) => { if(val){ this.setState({eserora2:val}) } else {console.log('err')}});
+      await getSetting('eserOra1', (val, err) => { if(val){ this.setState({eserora1:val}) } else {/*console.log(err)*/}});
+      await getSetting('eserOra2', (val, err) => { if(val){ this.setState({eserora2:val}) } else {/*console.log(err)*/}});
     }
 
 noti(){
 
-  console.log('primanot') 
 
   let mnotification = new firebase.notifications.Notification({show_in_foreground: true})
   .setNotificationId('nitId')
@@ -73,11 +72,10 @@ noti(){
   .android.setSmallIcon('ic_launcher')
   .android.setPriority(firebase.notifications.Android.Priority.High);
 
-  console.log(mnotification) 
+  //console.log(mnotification) 
 
               firebase.notifications().displayNotification(mnotification)
 
-console.log('doponot') 
 }
 
     startNoti(tipo, date){
@@ -259,31 +257,31 @@ console.log('doponot')
       switch(this.state.tipo){
         case 'medicora1':
         this.setState({medicora1:hour})
-        await setSetting('medicOra1', hour, (err) => { if(err){ console.log(err) } else { console.log('kei salvata') } }); 
+        await setSetting('medicOra1', hour, (err) => { if(err){ return /*console.log(err)*/ } else { /*console.log('kei salvata')*/ } }); 
         this.startNoti('medicora1',date);
         break;
 
         case 'medicora2':
         this.setState({medicora2:hour})
-        await setSetting('medicOra2', hour, (err) => { if(err){ console.log(err) } else { console.log('kei salvata') } }); 
+        await setSetting('medicOra2', hour, (err) => { if(err){ /*console.log(err)*/ } else { /*console.log('kei salvata')*/ } }); 
         this.startNoti('medicora2',date);
         break;
 
         case 'medicora3':
         this.setState({medicora3:hour})
-        await setSetting('medicOra3', hour, (err) => { if(err){ console.log(err) } else { console.log('kei salvata') } }); 
+        await setSetting('medicOra3', hour, (err) => { if(err){ /*console.log(err)*/ } else { /*console.log('kei salvata')*/ } }); 
         this.startNoti('medicora3',date);
         break;
 
         case 'eserora1':
         this.setState({eserora1:hour})
-        await setSetting('eserora1', hour, (err) => { if(err){ console.log(err) } else { console.log('kei salvata') } }); 
+        await setSetting('eserora1', hour, (err) => { if(err){ /*console.log(err)*/ } else { /*console.log('kei salvata')*/ } }); 
         this.startNoti('eserora1',date);
         break;
 
         case 'eserora2':
         this.setState({eserora2:hour})
-        await setSetting('eserOra2', hour, (err) => { if(err){ console.log(err) } else { console.log('kei salvata') } });
+        await setSetting('eserOra2', hour, (err) => { if(err){ /*console.log(err)*/ } else {/* console.log('kei salvata')*/ } });
         this.startNoti('eserora2',date);
         break;
 
