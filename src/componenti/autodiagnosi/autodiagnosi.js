@@ -19,6 +19,7 @@ import DrawerButton from '../utils/drawerbutton';
 
 import Wizard from "react-native-wizard";
 import Risposta from "./risposta";
+import RispostaImg from "./rispostaimg";
 
 
 
@@ -42,6 +43,7 @@ export default class Autodiagnosi extends Component {
 
         this.setDisbld = this.setDisbld.bind(this);
         this.setDiagns = this.setDiagns.bind(this);
+        this.avanti = this.avanti.bind(this);
         
 
 
@@ -52,6 +54,7 @@ export default class Autodiagnosi extends Component {
           currentIndex:'',
           disabled:true,
           diagnosi:'',
+          diagnosiFoto:'',
           modalVisible:false
                 };
  
@@ -64,6 +67,11 @@ export default class Autodiagnosi extends Component {
     
     setDiagns(diagns){
       this.setState({diagnosi:diagns})
+    }
+
+    avanti(diagnosi){
+      this.setState({diagnosiFoto:diagnosi})
+      this.wizard.next()
     }
 
 
@@ -80,6 +88,7 @@ export default class Autodiagnosi extends Component {
 
       steps = [
       
+        {component: RispostaImg, props : {domanda: -2, avanti:this.avanti, setDiagnosi:this.setDiagns}},
         {component: Risposta, props : {domanda: 0, setDisabled:this.setDisbld, setDiagnosi:this.setDiagns}},
         {component: Risposta, props : {domanda: 1, setDisabled:this.setDisbld, setDiagnosi:this.setDiagns}},
         {component: Risposta, props : {domanda: 2, setDisabled:this.setDisbld, setDiagnosi:this.setDiagns}},
@@ -173,7 +182,7 @@ export default class Autodiagnosi extends Component {
           
           <View style={{flex:0.5, borderRadius:5, borderWidth:1, marginHorizontal:'10%', borderColor:'#333333'}}>
             <View style={{backgroundColor: '#333333', flex: 1, justifyContent:'center', alignContent:'center', alignItems:'center'}}>
-                <Text style={{fontSize:25, color:'#988C6C', textAlign:'center'}}>La tua diagnosi è: {this.state.diagnosi}</Text> 
+                <Text style={{fontSize:25, color:'#988C6C', textAlign:'center'}}>La tua diagnosi è: {this.state.diagnosiFoto != '' ? this.state.diagnosiFoto : this.state.diagnosi}</Text> 
 
                 <Text style={{fontSize:25, color:'#9A2C45', textAlign:'center'}}>Quest' autodiagnosi non sostituisce la visita medica. In ogni caso è raccomandabile consultare lo specialista che potrebbe proporti delle ulteriori prove diagnostiche.</Text> 
 
@@ -186,7 +195,7 @@ export default class Autodiagnosi extends Component {
 
              <TouchableHighlight
                 onPress={() => {
-                  this.setState({modalVisible:!this.state.modalVisible});
+                  this.setState({modalVisible:false, diagnosi:'', diagnosiFoto:''}) 
                 }}>
                 <Text style={{fontSize:20, color:'#988C6C', textAlign:'center'}}>Ok</Text>
               </TouchableHighlight>

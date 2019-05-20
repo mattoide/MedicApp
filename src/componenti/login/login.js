@@ -26,12 +26,12 @@ var fetchTimeout = require('fetch-timeout');
 
 
 
-export const loginUrl = 'http://appdev.novus.cc:8000/api/login';  
-export const firebasetokenurl = 'http://appdev.novus.cc:8000/api/firebasetoken';
+// export const loginUrl = 'http://appdev.novus.cc:8000/api/login';  
+// export const firebasetokenurl = 'http://appdev.novus.cc:8000/api/firebasetoken';
 
 
-// export const loginUrl = 'http://192.168.178.161:8000/api/login';  
-// export const firebasetokenurl = 'http://192.168.178.161:8000/api/firebasetoken';
+export const loginUrl = 'http://192.168.1.7:8000/api/login';  
+export const firebasetokenurl = 'http://192.168.1.7:8000/api/firebasetoken';
 
 
 export default class Login extends Component {
@@ -40,10 +40,10 @@ export default class Login extends Component {
         super(props);
 
         this.state = {
-            // email: 'a@a.it', 
-            // password: '1111',
-            email: '', 
-            password: '',
+            email: 'a@a.it', 
+            password: '1111',
+            // email: '', 
+            // password: '',
             fetchTimeoutTime: 10000,
             caricamento: false,
             spinner: '',
@@ -57,7 +57,7 @@ export default class Login extends Component {
 
     }
 
-    async componentDidMount() {
+    async componentWillMount() {
         let notificationDisplayedListener = firebase.notifications().onNotificationDisplayed((notification) => {
 
         });
@@ -94,10 +94,16 @@ export default class Login extends Component {
         });
     }
     
-    componentWillUnmount() {
-        this.notificationDisplayedListener();
-        this.notificationListener();
-    }
+    // componentWillUnmount() {
+    //     this.notificationDisplayedListener();
+    //     this.notificationListener();
+    // }
+
+    // componentWillUnmount() {
+    //     this.notificationDisplayedListener();
+    //     this.notificationListener();
+    //     this.notificationOpenedListener();
+    // }
 
     static navigationOptions = {
         drawerLabel: () => null     

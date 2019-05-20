@@ -45,6 +45,12 @@ export default class Impostazioni extends Component {
  
     }
 
+  //   componentWillUnmount() {
+  //     this.notificationDisplayedListener();
+  //     this.notificationListener();
+  //     this.notificationOpenedListener();
+  // }
+
    async componentWillMount(){
 
     // Build a channel
@@ -61,13 +67,13 @@ firebase.notifications().android.createChannel(channel);
       await getSetting('eserOra2', (val, err) => { if(val){ this.setState({eserora2:val}) } else {/*console.log(err)*/}});
     }
 
-noti(){
+noti(msg){
 
-
+console.log(msg)
   let mnotification = new firebase.notifications.Notification({show_in_foreground: true})
   .setNotificationId('nitId')
-  .setTitle('notification.title')
-  .setBody('notification.body')
+  .setTitle(msg.titolo)
+  .setBody(msg.testo)
   .android.setChannelId('remichannel')
   .android.setSmallIcon('ic_launcher')
   .android.setPriority(firebase.notifications.Android.Priority.High);
@@ -87,6 +93,9 @@ noti(){
       } else {
         start = 86400000 -(now - noti);
       }
+ 
+      const esercizi = {titolo:"Esercizi", testo:"Ricordati di fare gli esercizi!"}
+const medicinali = {titolo:"Medicinali",testo:"Ricordati di prendere i medicinali!"}
 
       switch(tipo){
 
@@ -100,9 +109,11 @@ noti(){
 
           medicora1TimeOut = BackgroundTimer.setTimeout(() => {
 
-            this.noti();
+            this.noti(medicinali);
+            console.log("porcodio1")
 
-            medicora1Interval = BackgroundTimer.setInterval(() => { this.noti();  }, 86400000);
+            medicora1Interval = BackgroundTimer.setInterval(() => { this.noti(medicinali);
+              console.log("porcodio1")  }, 86400000);
 
           }, start);
 
@@ -110,9 +121,11 @@ noti(){
 
                 medicora1TimeOut = BackgroundTimer.setTimeout(() => {
 
-                  this.noti();
+                  this.noti(medicinali);
+                  console.log("porcodio1")
 
-                  medicora1Interval = BackgroundTimer.setInterval(() => { this.noti();  }, 86400000);
+                  medicora1Interval = BackgroundTimer.setInterval(() => { this.noti(medicinali);
+                    console.log("porcodio1")  }, 86400000);
 
                 }, start);
         }
@@ -128,9 +141,9 @@ noti(){
 
           medicora2TimeOut = BackgroundTimer.setTimeout(() => {
 
-            this.noti();
+            this.noti(medicinali);
 
-            medicora2Interval = BackgroundTimer.setInterval(() => { this.noti();  }, 86400000);
+            medicora2Interval = BackgroundTimer.setInterval(() => { this.noti(medicinali);  }, 86400000);
            
           }, start);
 
@@ -138,9 +151,9 @@ noti(){
 
                 medicora2TimeOut = BackgroundTimer.setTimeout(() => {
 
-                  this.noti();
+                  this.noti(medicinali);
 
-                  medicora2Interval = BackgroundTimer.setInterval(() => { this.noti();  }, 86400000);
+                  medicora2Interval = BackgroundTimer.setInterval(() => { this.noti(medicinali);  }, 86400000);
                  
                 }, start);
         }
@@ -157,9 +170,9 @@ noti(){
 
           medicora3TimeOut = BackgroundTimer.setTimeout(() => {
 
-            this.noti();
+            this.noti(medicinali);
             
-            medicora3Interval = BackgroundTimer.setInterval(() => { this.noti();  }, 86400000);
+            medicora3Interval = BackgroundTimer.setInterval(() => { this.noti(medicinali);  }, 86400000);
            
           }, start);
 
@@ -167,9 +180,9 @@ noti(){
 
                 medicora3TimeOut = BackgroundTimer.setTimeout(() => {
 
-                  this.noti();
+                  this.noti(medicinali);
                   
-                  medicora3Interval = BackgroundTimer.setInterval(() => { this.noti();  }, 86400000);
+                  medicora3Interval = BackgroundTimer.setInterval(() => { this.noti(medicinali);  }, 86400000);
                  
                 }, start);
         }
@@ -185,9 +198,9 @@ noti(){
           
           eserora1TimeOut = BackgroundTimer.setTimeout(() => {
 
-            this.noti();
+            this.noti(esercizi);
             
-            eserora1Interval = BackgroundTimer.setInterval(() => { this.noti();  }, 86400000);
+            eserora1Interval = BackgroundTimer.setInterval(() => { this.noti(esercizi);  }, 86400000);
            
           }, start);
 
@@ -195,9 +208,9 @@ noti(){
 
                   eserora1TimeOut = BackgroundTimer.setTimeout(() => {
 
-                  this.noti();
+                  this.noti(esercizi);
                   
-                  eserora1Interval = BackgroundTimer.setInterval(() => { this.noti();  }, 86400000);
+                  eserora1Interval = BackgroundTimer.setInterval(() => { this.noti(esercizi);  }, 86400000);
                  
                 }, start);
         }
@@ -215,9 +228,9 @@ noti(){
           
           eserora2TimeOut = BackgroundTimer.setTimeout(() => {
 
-            this.noti();
+            this.noti(esercizi);
             
-            eserora2Interval = BackgroundTimer.setInterval(() => { this.noti();  }, 86400000);
+            eserora2Interval = BackgroundTimer.setInterval(() => { this.noti(esercizi);  }, 86400000);
            
           }, start);
 
@@ -225,9 +238,9 @@ noti(){
 
                   eserora2TimeOut = BackgroundTimer.setTimeout(() => {
 
-                  this.noti();
+                  this.noti(esercizi);
                   
-                  eserora2Interval = BackgroundTimer.setInterval(() => { this.noti();  }, 86400000);
+                  eserora2Interval = BackgroundTimer.setInterval(() => { this.noti(esercizi);  }, 86400000);
                  
                 }, start);
         }

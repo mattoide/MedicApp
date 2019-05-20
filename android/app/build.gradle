@@ -74,7 +74,7 @@ import com.android.build.OutputFile
 
 project.ext.react = [
     entryFile: "index.js",
-             bundleInDebug: true
+            //  bundleInDebug: true
 
 ]
 
@@ -136,6 +136,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-background-job')
     implementation project(':react-native-background-timer')
     implementation project(':@react-native-community_async-storage')
     implementation project(':react-native-image-picker')
