@@ -131,13 +131,17 @@ export default class Risposta extends Component {
        calcolaDiagnosi(){
 
         if(this.state.domanda2.risposta == "Solo quando cammino" && this.state.domanda3.risposta == "No. Mi fa male solo con le scarpe")
-        this.setState({diagnosi:dagnosi[0]})
-        else if(this.state.domanda2.risposta == "Entrambi i casi" && this.state.domanda3.risposta == "Si")
-        this.setState({diagnosi:dagnosi[1]})        
-        else if(this.state.domanda2.risposta == "Solo quando cammino" && this.state.domanda3.risposta == "No. Mi fa male solo con le scarpe" && this.state.domanda4.risposta == "Si. Il dolore è tanto piu forte quando cammino")
-        this.setState({diagnosi:dagnosi[2]})
-        else if(this.state.domanda2.risposta == "Solo quando cammino" && this.state.domanda3.risposta == "No. Mi fa male solo con le scarpe" && this.state.domanda4.risposta == "Si. Il dolore è tanto piu forte quando cammino")
-        this.setState({diagnosi:dagnosi[3]})
+            this.setState({diagnosi:dagnosi[0]})
+        if(this.state.domanda2.risposta == "Entrambi i casi" && this.state.domanda3.risposta == "Si")
+            this.setState({diagnosi:dagnosi[1]})        
+        if(this.state.domanda2.risposta == "Solo quando cammino" && this.state.domanda3.risposta == "No. Mi fa male solo con le scarpe" && this.state.domanda4.risposta == "Si. Il dolore è tanto piu forte quando cammino")
+            this.setState({diagnosi:dagnosi[2]})
+        if(this.state.domanda2.risposta == "Non mi fa male" && this.state.domanda3.risposta == "Non mi fa male")
+            this.setState({diagnosi:dagnosi[5]})
+        if(this.state.domanda2.risposta == "Solo quando cammino" && this.state.domanda3.risposta == "No. Mi fa male solo con le scarpe" && this.state.domanda4.risposta == "Si. Il dolore è tanto piu forte quando cammino")
+            this.setState({diagnosi:dagnosi[6]})
+        if(this.state.domanda2.risposta == "Solo quando cammino" && this.state.domanda3.risposta == "Si" && this.state.domanda4.risposta == "Si. Il dolore è tanto piu forte quando cammino")
+            this.setState({diagnosi:dagnosi[9] + ", " + dagnosi[10]})
 
        }
 
