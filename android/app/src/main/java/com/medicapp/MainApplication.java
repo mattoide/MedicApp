@@ -3,7 +3,7 @@ package com.medicapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.pilloxa.backgroundjob.BackgroundJobPackage;
+// import com.pilloxa.backgroundjob.BackgroundJobPackage;
 import com.ocetnik.timer.BackgroundTimerPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.imagepicker.ImagePickerPackage;
@@ -34,7 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new BackgroundJobPackage(),
+            // new BackgroundJobPackage(),
             new BackgroundTimerPackage(),
             new AsyncStoragePackage(),
             new ImagePickerPackage(),

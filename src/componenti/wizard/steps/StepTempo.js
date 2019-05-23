@@ -17,10 +17,11 @@ import {
 
 import { Notification } from 'react-native-firebase';
 import firebase from 'react-native-firebase';
+import * as Progress from 'react-native-progress';
 
+import BackgroundTimer from 'react-native-background-timer';
 
 var fetchTimeout = require('fetch-timeout');
-
 
 
 export default class StepTempo extends Component {
@@ -29,7 +30,10 @@ export default class StepTempo extends Component {
         super(props);
 
         this.state = {
-          img: ''
+          img: '',
+          descrizione:'',
+          countdown:this.msToTime(this.props.tempo),
+          ms:1
         };
 
 
@@ -146,24 +150,94 @@ export default class StepTempo extends Component {
       }
       if(this.state.img != src)
       this.setState({img:src})
+      
     }
-    
- 
- 
+
+    componentDidMount(){
+    }
+
+    componentDidUpdate(){
+      if(this.state.descrizione != this.props.descrizione){
+        this.setState({descrizione:this.props.descrizione})   
+
+          try{
+            BackgroundTimer.clearInterval(interval);
+            BackgroundTimer.clearTimeout(timeOut); 
+          } catch(e){}
+        
+
+        this.timer( this.props.tempo);
+      }
+
+    }
+
+    msToTime(duration) {
+      // var milliseconds = parseInt((duration%1000)/100)
+      //     , seconds = parseInt((duration/1000)%60)
+      //     , minutes = parseInt((duration/(1000*60))%60)
+      //     , hours = parseInt((duration/(1000*60*60))%24);
+
+          var seconds = parseInt((duration/1000)%60)
+          , minutes = parseInt((duration/(1000*60))%60)
+
+      // hours = (hours < 10) ? "0" + hours : hours;
+      minutes = (minutes < 10) ? "0" + minutes : minutes;
+      seconds = (seconds < 10) ? "0" + seconds : seconds;
+  
+      // return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
+      return minutes + ":" + seconds;
+  }
+    timer(time){
+  
+       i = time;
+      interval = BackgroundTimer.setInterval(() => {
+
+        i = i - 1000;
+
+        if(i>=0){
+        j = parseFloat(((i/time)*100)/100).toFixed(3)
+        this.setState({countdown: this.msToTime(i), ms:j })
+          console.log(this.state.ms)
+        } else{
+                     BackgroundTimer.clearInterval(interval);
+          console.log('finisci')
+
+        }
+        }, 1000);
+
+      //   timeOut = BackgroundTimer.setTimeout(() => {
+      //     BackgroundTimer.clearInterval(interval);
+      //     BackgroundTimer.clearTimeout(timeOut);
+      //     console.log('finisci')
+      // }, time+5000);
+   
+   
+    }
+   
     render() {
 //  var  a = require('../../../immagini/esercizi'+this.props.immagine);
 // var a = this.props.immagine;
+
+
         return (
             
           <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
            
+           <View style={{flex:1,justifyContent:'center'}}>
+        <Progress.Circle style={{}} size={200} color='#A32B47' unfilledColor='#333333' borderColor='#2E2A2A' indeterminate={false} progress={this.state.ms}  />
+        <View style={{position:'absolute', justifyContent:'center',alignSelf:'center', alignItems:'center'}}>
+        <Text style={{fontSize:25, color:'#988C6C', }}>{this.state.countdown}</Text>
+        </View>
+    </View>
+
+    
+           <Text style={{fontSize:25, color:'#988C6C', textAlign:'center' }}>{this.props.descrizione}</Text>
+
            
            <Image 
             source={this.state.img}
             style={{ height: 150, width: 150, borderRadius: 200}} 
             /> 
-
-           <Text>{this.props.descrizione}</Text>
 
 
           </View>

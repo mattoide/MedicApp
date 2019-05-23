@@ -89,9 +89,8 @@ export default class Riablitazione extends Component {
                    component: StepTempo,
                    props    : {
                      descrizione: element.nome,
-                     immagine: element.immagine
-
-             
+                     immagine: element.immagine,
+                     tempo: 120000
                    }
                   }
                   steps.push(a);
@@ -115,7 +114,8 @@ export default class Riablitazione extends Component {
              component: StepInt,
              props    : {
                descrizione: element.nome,
-               immagine: element.immagine
+               immagine: element.immagine,
+               swipes: 8
        
              }
             }
@@ -123,6 +123,7 @@ export default class Riablitazione extends Component {
         }
 
           });
+          console.log(steps)
       this.props.navigation.navigate('Wizard', {steps: steps});
 
     }

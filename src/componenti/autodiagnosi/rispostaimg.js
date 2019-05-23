@@ -25,15 +25,15 @@ const immagini = [
     {immagine: require('../../immagini/esercizi/defaultfeetexercise1_0.jpg'), diagnosi:'Haglund'},
     {immagine: require('../../immagini/esercizi/defaultfeetexercise2_0.jpg'), diagnosi:'Piede piatto'},
     {immagine: require('../../immagini/esercizi/defaultfeetexercise3_0.jpg'), diagnosi:''}, //3
-    {immagine: '', diagnosi:''},//4
-    {immagine: '', diagnosi:''},//5
-    {immagine: '', diagnosi:''},//6
-    {immagine: '', diagnosi:''},//7
-    {immagine: '', diagnosi:'5 dito varo'},
-    {immagine: '', diagnosi:'Brachimetatarsia'},
-    {immagine: '', diagnosi:'Spina'},
-    {immagine: '', diagnosi:''},//11
-    {immagine: '', diagnosi:'Sintattilia'},
+    {immagine: require('../../immagini/esercizi/defaultfeetexercise1_0.jpg'), diagnosi:''},//4
+    {immagine: require('../../immagini/esercizi/defaultfeetexercise2_0.jpg'), diagnosi:''},//5
+    {immagine: require('../../immagini/esercizi/defaultfeetexercise3_0.jpg'), diagnosi:''},//6
+    {immagine: require('../../immagini/esercizi/defaultfeetexercise1_0.jpg'), diagnosi:''},//7
+    {immagine: require('../../immagini/esercizi/defaultfeetexercise2_0.jpg'), diagnosi:'5 dito varo'},
+    {immagine: require('../../immagini/esercizi/defaultfeetexercise3_0.jpg'), diagnosi:'Brachimetatarsia'},
+    {immagine: require('../../immagini/esercizi/defaultfeetexercise1_0.jpg'), diagnosi:'Spina'},
+    {immagine: require('../../immagini/esercizi/defaultfeetexercise2_0.jpg'), diagnosi:''},//11
+    {immagine: require('../../immagini/esercizi/defaultfeetexercise3_0.jpg'), diagnosi:'Sintattilia'},
 ]
 
 const dagnosi = ["Alluce valgo", "Alluce rigido", "Dito a martello", "Piede piatto", "Sintattilia", "Allungamento", "Accorciamento", "Haglund", "Spina", "Metatarsalagia", "Morton", "5 dito varo", "Brachimetatarsia"];

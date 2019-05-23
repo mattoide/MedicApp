@@ -35,7 +35,7 @@ export default class StepRip extends Component {
     }
 
 
-    componentDidUpdate(){
+    componentWillUpdate(){
     
         let src;
     

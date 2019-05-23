@@ -13,6 +13,7 @@ import {
     Image
 } from 'react-native';
 
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 
 import { Notification } from 'react-native-firebase';
@@ -28,14 +29,51 @@ export default class StepInt extends Component {
         super(props);
 
         this.state = {
-            img: ''
+            img: '',
+            swipes: this.props.swipes
         };
-
-
     }
 
 
-    componentDidUpdate(){
+    onSwipeUp(gestureState) {
+        this.setState({myText: 'You swiped up!'});
+        console.log('upz')
+      }
+    
+      onSwipeDown(gestureState) {
+        if(this.state.swipes > 0)
+        this.setState({swipes: this.state.swipes-1});
+      }
+    
+      onSwipeLeft(gestureState) {
+        this.setState({myText: 'You swiped left!'});
+      }
+    
+      onSwipeRight(gestureState) {
+        this.setState({myText: 'You swiped right!'});
+      }
+    
+      onSwipe(gestureName, gestureState) {
+        const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections;
+        this.setState({gestureName: gestureName});
+        switch (gestureName) {
+          case SWIPE_UP:
+                console.log('name: ' + gestureName + " - state: " +  gestureState)
+            break;
+          case SWIPE_DOWN:
+            console.log('name: ' + gestureName + " - state: " +  gestureState)
+            break;
+          case SWIPE_LEFT:
+            console.log('name: ' + gestureName + " - state: " +  gestureState)
+            break;
+          case SWIPE_RIGHT:
+            console.log('name: ' + gestureName + " - state: " +  gestureState)
+            break;
+        }
+      }
+
+
+    componentWillUpdate(){
     
         let src;
     
@@ -145,27 +183,56 @@ export default class StepInt extends Component {
          break;
         }
         if(this.state.img != src)
-        this.setState({img:src})
-
+        this.setState({img:src}) 
+        
       }
     
+componentWillUnmount(){
+  if(this.state.swipes != this.props.swipes)
+  this.setState({swipes:this.props.swipes})
 
+}
   
  
     render() {
+ 
+        const config = {
+            velocityThreshold: 0.3,
+            directionalOffsetThreshold: 80
+          };
  
         return (
             
           <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
            
-           
-          <Image 
-           source={this.state.img}
-           style={{ height: 150, width: 150, borderRadius: 200}} 
-           /> 
+           <GestureRecognizer
+        onSwipe={(direction, state) => this.onSwipe(direction, state)}
+        onSwipeUp={(state) => this.onSwipeUp(state)}
+        onSwipeDown={(state) => this.onSwipeDown(state)}
+        onSwipeLeft={(state) => this.onSwipeLeft(state)}
+        onSwipeRight={(state) => this.onSwipeRight(state)}
+        config={config}
+        style={{
+          flex: 1,
+          // backgroundColor: 'red',
+          width:'100%',
+          alignItems:'center'
+        }}
+        >
+       
+       
+       <Image 
+             source={this.state.img}
+             style={{ height: 150, width: 150, borderRadius: 200}} 
+             /> 
+ 
+ <Text style={{fontSize:25, color:'#988C6C', textAlign:'center' }}>{this.props.descrizione}</Text>
+ <Text style={{fontSize:25, color:'#988C6C', textAlign:'center' }}>Posa il telefono a terra e senza premere, con l' alluce effettua uno "swipe" sullo schermo</Text>
+ <Text style={{fontSize:20, color:'#988C6C', textAlign:'center' }}>Ripeti {this.state.swipes} volte</Text>
 
-          <Text>{this.props.descrizione}</Text>
 
+
+      </GestureRecognizer>
 
          </View>
         );
