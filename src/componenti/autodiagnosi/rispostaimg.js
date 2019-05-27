@@ -22,18 +22,18 @@ var fetchTimeout = require('fetch-timeout');
 
  
 const immagini = [
-    {immagine: require('../../immagini/esercizi/defaultfeetexercise1_0.jpg'), diagnosi:'Haglund'},
-    {immagine: require('../../immagini/esercizi/defaultfeetexercise2_0.jpg'), diagnosi:'Piede piatto'},
-    {immagine: require('../../immagini/esercizi/defaultfeetexercise3_0.jpg'), diagnosi:''}, //3
-    {immagine: require('../../immagini/esercizi/defaultfeetexercise1_0.jpg'), diagnosi:''},//4
-    {immagine: require('../../immagini/esercizi/defaultfeetexercise2_0.jpg'), diagnosi:''},//5
-    {immagine: require('../../immagini/esercizi/defaultfeetexercise3_0.jpg'), diagnosi:''},//6
-    {immagine: require('../../immagini/esercizi/defaultfeetexercise1_0.jpg'), diagnosi:''},//7
-    {immagine: require('../../immagini/esercizi/defaultfeetexercise2_0.jpg'), diagnosi:'5 dito varo'},
-    {immagine: require('../../immagini/esercizi/defaultfeetexercise3_0.jpg'), diagnosi:'Brachimetatarsia'},
-    {immagine: require('../../immagini/esercizi/defaultfeetexercise1_0.jpg'), diagnosi:'Spina'},
-    {immagine: require('../../immagini/esercizi/defaultfeetexercise2_0.jpg'), diagnosi:''},//11
-    {immagine: require('../../immagini/esercizi/defaultfeetexercise3_0.jpg'), diagnosi:'Sintattilia'},
+    {immagine: require('../../immagini/diagnosi/haglund.png'), diagnosi:'Haglund'},
+    {immagine: require('../../immagini/diagnosi/piede_piatto.png'), diagnosi:'Piede piatto'},
+    {immagine: require('../../immagini/diagnosi/metatarsalgia.png'), diagnosi:''}, //3
+    {immagine: require('../../immagini/diagnosi/allucevalgo_allucerigido.png'), diagnosi:''},//4
+    {immagine: require('../../immagini/diagnosi/4ditomartello_allung_accorc.png'), diagnosi:''},//5
+    {immagine: require('../../immagini/diagnosi/3ditomartello_allung_accorc.png'), diagnosi:''},//6
+    {immagine: require('../../immagini/diagnosi/2ditomartello_allung_accorc.png'), diagnosi:''},//7
+    {immagine: require('../../immagini/diagnosi/5ditovaro.png'), diagnosi:'5 dito varo'},
+    {immagine: require('../../immagini/diagnosi/brachimetatarsia.png'), diagnosi:'Brachimetatarsia'},
+    {immagine: require('../../immagini/diagnosi/spina_calcaneare.png'), diagnosi:'Spina'},
+    {immagine: require('../../immagini/diagnosi/neuromaDiMorton.png'), diagnosi:''},//11
+    {immagine: require('../../immagini/diagnosi/sintattilia.png'), diagnosi:'Sintattilia'},
 ]
 
 const dagnosi = ["Alluce valgo", "Alluce rigido", "Dito a martello", "Piede piatto", "Sintattilia", "Allungamento", "Accorciamento", "Haglund", "Spina", "Metatarsalagia", "Morton", "5 dito varo", "Brachimetatarsia"];
