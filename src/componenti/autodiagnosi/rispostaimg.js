@@ -31,7 +31,7 @@ const immagini = [
     {immagine: require('../../immagini/diagnosi/2ditomartello_allung_accorc.png'), diagnosi:''},//7
     {immagine: require('../../immagini/diagnosi/5ditovaro.png'), diagnosi:'5 dito varo'},
     {immagine: require('../../immagini/diagnosi/brachimetatarsia.png'), diagnosi:'Brachimetatarsia'},
-    {immagine: require('../../immagini/diagnosi/spina_calcaneare.png'), diagnosi:'Spina'},
+    {immagine: require('../../immagini/diagnosi/spina_calcaneare.png'), diagnosi:'Spina calcaneare'},
     {immagine: require('../../immagini/diagnosi/neuromaDiMorton.png'), diagnosi:''},//11
     {immagine: require('../../immagini/diagnosi/sintattilia.png'), diagnosi:'Sintattilia'},
 ]
@@ -83,11 +83,10 @@ export default class RispostaImg extends Component {
                                 justifyContent: 'center', alignItems:'center', alignContent:'center', alignSelf:'center',
                                 width:150,
                                 height:150,
-                                borderRadius: 5,
+                                borderRadius: 0,
                                 padding: 0
                                 }}>
  
-                <ScrollView>
  
 <TouchableOpacity 
 onPress={()=>{this.setState({dagnosi:item.diagnosi})
@@ -95,12 +94,23 @@ onPress={()=>{this.setState({dagnosi:item.diagnosi})
              }} 
 >
 
-            <Image 
-            source={item.immagine}
-            style={{width:150, height:150}}
-            >
-                
-            </Image>
+   {item.diagnosi == "Spina calcaneare" || item.diagnosi == "Piede piatto"  ? 
+          <Image 
+          source={item.immagine} 
+          style={{flex:1, resizeMode:'contain', aspectRatio:0.9}}
+          >
+              
+          </Image>
+  : 
+  <Image 
+  source={item.immagine} 
+  style={{flex:1, resizeMode:'contain'}}
+  >
+      
+  </Image>
+  }
+
+ 
 </TouchableOpacity>
                     
                 {/* <View style={{flexDirection:'row',flex:1}}>
@@ -113,7 +123,6 @@ onPress={()=>{this.setState({dagnosi:item.diagnosi})
                 <Text style={{textAlign:'center', fontSize:myFontSize, color:'#988C6C', }}>{item.completi}/{item.totali}</Text>           
                 </View>
                 </View> */}
-                </ScrollView>             
               </View> 
           );
         } 
@@ -131,7 +140,7 @@ onPress={()=>{this.setState({dagnosi:item.diagnosi})
             renderItem={({item, index}) => (this._renderItem(item, index))}
              style={{flex:1}}
             itemDimension={150} 
-            itemContainerStyle={{justifyContent:'center', alignContent:'center', alignItems:'center', padding:1}} 
+            itemContainerStyle={{justifyContent:'center', alignContent:'center', alignItems:'center', padding:0}} 
             spacing={10}
             />  
 

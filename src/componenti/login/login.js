@@ -26,12 +26,12 @@ var fetchTimeout = require('fetch-timeout');
 
 
 
-export const loginUrl = 'http://appdev.novus.cc:8000/api/login';  
-export const firebasetokenurl = 'http://appdev.novus.cc:8000/api/firebasetoken';
+// export const loginUrl = 'http://appdev.novus.cc:8000/api/login';  
+// export const firebasetokenurl = 'http://appdev.novus.cc:8000/api/firebasetoken';
 
 
-// export const loginUrl = 'http://10.102.5.92:8000/api/login';  
-// export const firebasetokenurl = 'http://10.102.5.92:8000/api/firebasetoken';
+export const loginUrl = 'http://192.168.137.1:8000/api/login';  
+export const firebasetokenurl = 'http://192.168.137.1:8000/api/firebasetoken';
 
 
 export default class Login extends Component {
@@ -40,10 +40,10 @@ export default class Login extends Component {
         super(props);
 
         this.state = {
-            // email: 'a@a.it', 
-            // password: '1111',
-            email: '', 
-            password: '',
+            email: 'a@a.it', 
+            password: '1111',
+            // email: '', 
+            // password: '',
             fetchTimeoutTime: 10000,
             caricamento: false,
             spinner: '',
