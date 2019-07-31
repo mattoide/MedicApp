@@ -28,13 +28,32 @@ import firebase from 'react-native-firebase';
 
 import {setSetting, getSetting} from '../utils/settings';
 
+import Pedometer from 'react-native-universal-pedometer';
+
 
 export class Passi extends Component{
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      pedometerData : {},
+    };
 }
+
+
+// getPassi(){
+
+
+//   const now = new Date();
+//   now.setHours(0,0,0,0);
+
+//   Pedometer.startPedometerUpdatesFromDate(now.getTime(), (pedometerData) => {
+//     this.setState({pedometerData: pedometerData})
+//     console.log(pedometerData)
+//   });
+
+
+//   }
   render(){
 
     return (
@@ -64,7 +83,8 @@ export default class Dashboard extends Component {
           percpassi:0,
 
           modalVisible: false,
-          notifica: ''
+          notifica: '',
+          pedometerData: {}
         };
     }
 
@@ -92,12 +112,33 @@ export default class Dashboard extends Component {
       return rand;
     } 
 
+    getPassi(){
+   
+      const now = new Date();
+      now.setHours(0,0,0,0);
+    
+      Pedometer.startPedometerUpdatesFromDate(now.getTime(), (pedometerData) => {
+        this.setState({pedometerData: pedometerData})
+        console.log(pedometerData)
+
+        this.setState({pedometerData: pedometerData, esercizi: this.random(), terapia: this.random(), passi: parseFloat(this.state.pedometerData.numberOfSteps).toFixed(0), percpassi: parseFloat(this.state.pedometerData.numberOfSteps/100000).toFixed(2)})
+
+      });
+    
+    
+      }
+
+      componentWillMount(){
+        this.getPassi();
+      }
+
     async componentDidMount(){
 
       let notificationListener = firebase.notifications().onNotification((notification) => {
         if(this.state.user.attivo == 1){
         this.setState({modalVisible: true, notifica: notification.body})
         }
+
     });
 
       this.props.navigation.addListener(
@@ -119,6 +160,7 @@ export default class Dashboard extends Component {
               }
             }
         });
+
 
           this.setState({esercizi: this.random(), terapia: this.random(), passi: parseFloat(this.random2()).toFixed(0), percpassi: parseFloat(this.random2()/100000).toFixed(2)})
         }
@@ -192,7 +234,7 @@ export default class Dashboard extends Component {
 <Text style={{fontSize:25, color:'#988C6C', }}>{this.state.passi} passi</Text>
 </View> */}
 
-<Passi percpassi={this.state.percpassi} passi={this.state.passi}></Passi>
+<Passi percpassi={this.state.percpassi} passi={this.state.pedometerData.numberOfSteps}></Passi>
 
 
 <Text style={{fontSize:25, color:'#988C6C', marginVertical:'15%'}}>Si cammia!</Text>
@@ -200,7 +242,7 @@ export default class Dashboard extends Component {
     <View style={{flexDirection:'row', justifyContent:'space-between'}}>
 
         <View style={{ marginHorizontal:'5%',alignItems:'center'}}>
-          <Text style={{fontSize:bigSize, color:'#988C6C'}}>14 Km</Text>
+          <Text style={{fontSize:bigSize, color:'#988C6C'}}>{this.state.pedometerData.distance ? parseFloat(this.state.pedometerData.distance).toFixed(2) : 0.00} m</Text>
           <Text style={{fontSize:littleSize, color:'#988C6C'}}>Distanza percorsa</Text>
         </View>
 

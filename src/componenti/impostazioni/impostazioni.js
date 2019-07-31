@@ -39,6 +39,7 @@ export default class Impostazioni extends Component {
           medicora3:'',
           eserora1:'',
           eserora2:'',
+          eserora3:'',
           tipo:'',
           isDateTimePickerVisible: false
         };
@@ -67,7 +68,7 @@ firebase.notifications().android.createChannel(channel);
       await getSetting('eserOra2', (val, err) => { if(val){ this.setState({eserora2:val}) } else {/*console.log(err)*/}});
     }
 
-noti(msg){
+notis(msg){
 
 console.log(msg)
   let mnotification = new firebase.notifications.Notification({show_in_foreground: true})
@@ -84,173 +85,235 @@ console.log(msg)
 
 }
 
-    startNoti(tipo, date){
-      var now = new Date().getTime();
-      var noti = date.getTime();
+    noti(date, msg, id){
 
-      if(now < noti){
-        start = noti - now;
-      } else {
-        start = 86400000 -(now - noti);
-      }
- 
-      const esercizi = {titolo:"Esercizi", testo:"Ricordati di fare gli esercizi!"}
-const medicinali = {titolo:"Medicinali",testo:"Ricordati di prendere i medicinali!"}
+      firebase.notifications().cancelNotification(id);
 
-      switch(tipo){
-
-        
-        case 'medicora1':
-
-        try{
-
-          BackgroundTimer.clearTimeout(medicora1TimeOut);
-          BackgroundTimer.clearInterval(medicora1Interval);
-
-          medicora1TimeOut = BackgroundTimer.setTimeout(() => {
-
-            this.noti(medicinali);
-            console.log("porcodio1")
-
-            medicora1Interval = BackgroundTimer.setInterval(() => { this.noti(medicinali);
-              console.log("porcodio1")  }, 86400000);
-
-          }, start);
-
-        } catch(e){
-
-                medicora1TimeOut = BackgroundTimer.setTimeout(() => {
-
-                  this.noti(medicinali);
-                  console.log("porcodio1")
-
-                  medicora1Interval = BackgroundTimer.setInterval(() => { this.noti(medicinali);
-                    console.log("porcodio1")  }, 86400000);
-
-                }, start);
-        }
-
-        break;
-
-        case 'medicora2':
-
-        try{
-
-          BackgroundTimer.clearTimeout(medicora2TimeOut);
-          BackgroundTimer.clearInterval(medicora2Interval);
-
-          medicora2TimeOut = BackgroundTimer.setTimeout(() => {
-
-            this.noti(medicinali);
-
-            medicora2Interval = BackgroundTimer.setInterval(() => { this.noti(medicinali);  }, 86400000);
-           
-          }, start);
-
-        } catch(e){
-
-                medicora2TimeOut = BackgroundTimer.setTimeout(() => {
-
-                  this.noti(medicinali);
-
-                  medicora2Interval = BackgroundTimer.setInterval(() => { this.noti(medicinali);  }, 86400000);
-                 
-                }, start);
-        }
-
+      let mnotification = new firebase.notifications.Notification({show_in_foreground: true})
+      .setNotificationId(id)
+      .setTitle(msg.titolo)
+      .setBody(msg.testo)
+      .android.setChannelId('remichannel')
+      .android.setSmallIcon('ic_launcher')
+      .android.setPriority(firebase.notifications.Android.Priority.High);
+  
+    //console.log(mnotification) 
+  //return mnotification;
+              //  firebase.notifications().displayNotification(mnotification)
        
-        break;
 
-        case 'medicora3':
-       
-        try{
-
-          BackgroundTimer.clearTimeout(medicora3TimeOut);
-          BackgroundTimer.clearInterval(medicora3Interval);
-
-          medicora3TimeOut = BackgroundTimer.setTimeout(() => {
-
-            this.noti(medicinali);
+              firebase.notifications().scheduleNotification(mnotification, {
+                fireDate: date.getTime(),
+                repeatInterval: 'day',
+                exact: true,
             
-            medicora3Interval = BackgroundTimer.setInterval(() => { this.noti(medicinali);  }, 86400000);
-           
-          }, start);
+            })
+  
+    }
 
-        } catch(e){
+  startNoti(tipo, date){
+   
 
-                medicora3TimeOut = BackgroundTimer.setTimeout(() => {
+    const esercizi = {titolo:"Esercizi", testo:"Ricordati di fare gli esercizi!"}
+    const medicinali = {titolo:"Medicinali",testo:"Ricordati di prendere i medicinali!"}
 
-                  this.noti(medicinali);
-                  
-                  medicora3Interval = BackgroundTimer.setInterval(() => { this.noti(medicinali);  }, 86400000);
-                 
-                }, start);
-        }
+    switch(tipo){
 
-        break;
+      
+      case 'medicora1':
+        this.noti(date, medicinali, '11')
+      break;
 
-        case 'eserora1':
-        try{
+      case 'medicora2':
+        this.noti(date, medicinali, '12')
+      break;
 
-          BackgroundTimer.clearTimeout(eserora1TimeOut);
-          BackgroundTimer.clearInterval(eserora1Interval);
+      case 'eserora1':
+        this.noti(date, esercizi, '21')
+      break;
 
-          
-          eserora1TimeOut = BackgroundTimer.setTimeout(() => {
+      case 'eserora2':
+        this.noti(date, esercizi, '22')
+      break;
 
-            this.noti(esercizi);
-            
-            eserora1Interval = BackgroundTimer.setInterval(() => { this.noti(esercizi);  }, 86400000);
-           
-          }, start);
-
-        } catch(e){
-
-                  eserora1TimeOut = BackgroundTimer.setTimeout(() => {
-
-                  this.noti(esercizi);
-                  
-                  eserora1Interval = BackgroundTimer.setInterval(() => { this.noti(esercizi);  }, 86400000);
-                 
-                }, start);
-        }
-
-       
-        break;
-
-        case 'eserora2':
-       
-        try{
-
-          BackgroundTimer.clearTimeout(eserora2TimeOut);
-          BackgroundTimer.clearInterval(eserora2Interval);
-
-          
-          eserora2TimeOut = BackgroundTimer.setTimeout(() => {
-
-            this.noti(esercizi);
-            
-            eserora2Interval = BackgroundTimer.setInterval(() => { this.noti(esercizi);  }, 86400000);
-           
-          }, start);
-
-        } catch(e){
-
-                  eserora2TimeOut = BackgroundTimer.setTimeout(() => {
-
-                  this.noti(esercizi);
-                  
-                  eserora2Interval = BackgroundTimer.setInterval(() => { this.noti(esercizi);  }, 86400000);
-                 
-                }, start);
-        }
-
-        break;
-
-      }
-
+      case 'eserora3':
+        this.noti(date, esercizi, '23')
+      break;
 
     }
+
+
+  }
+
+
+
+//     startNotis(tipo, date){
+//       var now = new Date().getTime();
+//       var noti = date.getTime();
+
+//       if(now < noti){
+//         start = noti - now;
+//       } else {
+//         start = 86400000 -(now - noti);
+//       }
+ 
+//       const esercizi = {titolo:"Esercizi", testo:"Ricordati di fare gli esercizi!"}
+// const medicinali = {titolo:"Medicinali",testo:"Ricordati di prendere i medicinali!"}
+
+//       switch(tipo){
+
+        
+//         case 'medicora1':
+
+//         try{
+
+//           BackgroundTimer.clearTimeout(medicora1TimeOut);
+//           BackgroundTimer.clearInterval(medicora1Interval);
+
+//           medicora1TimeOut = BackgroundTimer.setTimeout(() => {
+
+//             this.noti(medicinali);
+//             console.log("porcodio1")
+
+//             medicora1Interval = BackgroundTimer.setInterval(() => { this.noti(medicinali);
+//               console.log("porcodio1")  }, 86400000);
+
+//           }, start);
+
+//         } catch(e){
+
+//                 medicora1TimeOut = BackgroundTimer.setTimeout(() => {
+
+//                   this.noti(medicinali);
+//                   console.log("porcodio1")
+
+//                   medicora1Interval = BackgroundTimer.setInterval(() => { this.noti(medicinali);
+//                     console.log("porcodio1")  }, 86400000);
+
+//                 }, start);
+//         }
+
+//         break;
+
+//         case 'medicora2':
+
+//         try{
+
+//           BackgroundTimer.clearTimeout(medicora2TimeOut);
+//           BackgroundTimer.clearInterval(medicora2Interval);
+
+//           medicora2TimeOut = BackgroundTimer.setTimeout(() => {
+
+//             this.noti(medicinali);
+
+//             medicora2Interval = BackgroundTimer.setInterval(() => { this.noti(medicinali);  }, 86400000);
+           
+//           }, start);
+
+//         } catch(e){
+
+//                 medicora2TimeOut = BackgroundTimer.setTimeout(() => {
+
+//                   this.noti(medicinali);
+
+//                   medicora2Interval = BackgroundTimer.setInterval(() => { this.noti(medicinali);  }, 86400000);
+                 
+//                 }, start);
+//         }
+
+       
+//         break;
+
+//         case 'medicora3':
+       
+//         try{
+
+//           BackgroundTimer.clearTimeout(medicora3TimeOut);
+//           BackgroundTimer.clearInterval(medicora3Interval);
+
+//           medicora3TimeOut = BackgroundTimer.setTimeout(() => {
+
+//             this.noti(medicinali);
+            
+//             medicora3Interval = BackgroundTimer.setInterval(() => { this.noti(medicinali);  }, 86400000);
+           
+//           }, start);
+
+//         } catch(e){
+
+//                 medicora3TimeOut = BackgroundTimer.setTimeout(() => {
+
+//                   this.noti(medicinali);
+                  
+//                   medicora3Interval = BackgroundTimer.setInterval(() => { this.noti(medicinali);  }, 86400000);
+                 
+//                 }, start);
+//         }
+
+//         break;
+
+//         case 'eserora1':
+//         try{
+
+//           BackgroundTimer.clearTimeout(eserora1TimeOut);
+//           BackgroundTimer.clearInterval(eserora1Interval);
+
+          
+//           eserora1TimeOut = BackgroundTimer.setTimeout(() => {
+
+//             this.noti(esercizi);
+            
+//             eserora1Interval = BackgroundTimer.setInterval(() => { this.noti(esercizi);  }, 86400000);
+           
+//           }, start);
+
+//         } catch(e){
+
+//                   eserora1TimeOut = BackgroundTimer.setTimeout(() => {
+
+//                   this.noti(esercizi);
+                  
+//                   eserora1Interval = BackgroundTimer.setInterval(() => { this.noti(esercizi);  }, 86400000);
+                 
+//                 }, start);
+//         }
+
+       
+//         break;
+
+//         case 'eserora2':
+       
+//         try{
+
+//           BackgroundTimer.clearTimeout(eserora2TimeOut);
+//           BackgroundTimer.clearInterval(eserora2Interval);
+
+          
+//           eserora2TimeOut = BackgroundTimer.setTimeout(() => {
+
+//             this.noti(esercizi);
+            
+//             eserora2Interval = BackgroundTimer.setInterval(() => { this.noti(esercizi);  }, 86400000);
+           
+//           }, start);
+
+//         } catch(e){
+
+//                   eserora2TimeOut = BackgroundTimer.setTimeout(() => {
+
+//                   this.noti(esercizi);
+                  
+//                   eserora2Interval = BackgroundTimer.setInterval(() => { this.noti(esercizi);  }, 86400000);
+                 
+//                 }, start);
+//         }
+
+//         break;
+
+//       }
+
+
+//     }
 
     showDateTimePicker = (tipo) => {
       this.setState({ isDateTimePickerVisible: true, tipo:tipo });
@@ -259,12 +322,18 @@ const medicinali = {titolo:"Medicinali",testo:"Ricordati di prendere i medicinal
     hideDateTimePicker = () => {
       this.setState({ isDateTimePickerVisible: false });
     };
-  
+
      handleDatePicked = async date => {
 
       datetext = date.toTimeString();
       time = datetext.split(' ')[0];
       hour = time.split(':')[0] + ":" + time.split(':')[1]
+
+      //hour = date.valueOf();
+
+
+
+
 
 
       switch(this.state.tipo){
@@ -280,11 +349,6 @@ const medicinali = {titolo:"Medicinali",testo:"Ricordati di prendere i medicinal
         this.startNoti('medicora2',date);
         break;
 
-        case 'medicora3':
-        this.setState({medicora3:hour})
-        await setSetting('medicOra3', hour, (err) => { if(err){ /*console.log(err)*/ } else { /*console.log('kei salvata')*/ } }); 
-        this.startNoti('medicora3',date);
-        break;
 
         case 'eserora1':
         this.setState({eserora1:hour})
@@ -296,6 +360,13 @@ const medicinali = {titolo:"Medicinali",testo:"Ricordati di prendere i medicinal
         this.setState({eserora2:hour})
         await setSetting('eserOra2', hour, (err) => { if(err){ /*console.log(err)*/ } else {/* console.log('kei salvata')*/ } });
         this.startNoti('eserora2',date);
+        break;
+
+        
+        case 'eserora3':
+        this.setState({eserora3:hour})
+        await setSetting('eserOra3', hour, (err) => { if(err){ /*console.log(err)*/ } else {/* console.log('kei salvata')*/ } });
+        this.startNoti('eserora3',date);
         break;
 
 
@@ -316,7 +387,11 @@ const medicinali = {titolo:"Medicinali",testo:"Ricordati di prendere i medicinal
     };
 
     async componentDidMount(){
+      let notificationListener = firebase.notifications().onNotification((notification) => {
 
+        firebase.notifications().displayNotification(notification)
+
+    });
     }
 
     render() {
@@ -343,16 +418,16 @@ const medicinali = {titolo:"Medicinali",testo:"Ricordati di prendere i medicinal
         <IconFontAwsome name="running" size={50} color="#988C6C" />
         <Text style={style.bigText}>Orari notifiche esercizi</Text>
       
-        <TouchableHighlight onPress={()=>this.showDateTimePicker('medicora1')}>
-          <Text style={style.littleText}>{!this.state.medicora1 ? 'hh:mm' : this.state.medicora1}</Text> 
+        <TouchableHighlight onPress={()=>this.showDateTimePicker('eserora1')}>
+          <Text style={style.littleText}>{!this.state.eserora1 ? 'hh:mm' : this.state.eserora1}</Text> 
         </TouchableHighlight>
 
-        <TouchableHighlight onPress={()=> this.showDateTimePicker('medicora2')}>
-          <Text style={style.littleText}>{!this.state.medicora2 ? 'hh:mm' : this.state.medicora2}</Text> 
+        <TouchableHighlight onPress={()=> this.showDateTimePicker('eserora2')}>
+          <Text style={style.littleText}>{!this.state.eserora2 ? 'hh:mm' : this.state.eserora2}</Text> 
         </TouchableHighlight>
 
-        <TouchableHighlight onPress={()=> this.showDateTimePicker('medicora3')}>
-          <Text style={style.littleText}>{!this.state.medicora3 ? 'hh:mm' : this.state.medicora3}</Text> 
+        <TouchableHighlight onPress={()=> this.showDateTimePicker('eserora3')}>
+          <Text style={style.littleText}>{!this.state.eserora3 ? 'hh:mm' : this.state.eserora3}</Text> 
         </TouchableHighlight>
       </View>
 
@@ -361,12 +436,12 @@ const medicinali = {titolo:"Medicinali",testo:"Ricordati di prendere i medicinal
         <IconFontAwsome name="pills" size={50} color="#988C6C" />
         <Text style={style.bigText}>Orari notifiche medicinali</Text>
 
-        <TouchableHighlight onPress={()=> this.showDateTimePicker('eserora1')}>
-          <Text style={style.littleText}>{!this.state.eserora1 ? 'hh:mm' : this.state.eserora1}</Text> 
+        <TouchableHighlight onPress={()=> this.showDateTimePicker('medicora1')}>
+          <Text style={style.littleText}>{!this.state.medicora1 ? 'hh:mm' : this.state.medicora1}</Text> 
         </TouchableHighlight>
 
-        <TouchableHighlight onPress={()=> this.showDateTimePicker('eserora2')}>
-          <Text style={style.littleText}>{!this.state.eserora2 ? 'hh:mm' : this.state.eserora2}</Text> 
+        <TouchableHighlight onPress={()=> this.showDateTimePicker('medicora2')}>
+          <Text style={style.littleText}>{!this.state.medicora2 ? 'hh:mm' : this.state.medicora2}</Text> 
         </TouchableHighlight>
 
       </View>

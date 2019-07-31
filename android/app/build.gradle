@@ -136,6 +136,8 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-universal-pedometer')
+    implementation project(':react-native-background-job')
     // implementation project(':react-native-background-job')
     implementation project(':react-native-background-timer')
     implementation project(':@react-native-community_async-storage')

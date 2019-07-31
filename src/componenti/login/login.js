@@ -24,14 +24,17 @@ import firebase from 'react-native-firebase';
 var style = require('./loginStyle'); 
 var fetchTimeout = require('fetch-timeout');
 
+import Pedometer from 'react-native-universal-pedometer'
+import { AppRegistry } from 'react-native';
 
 
-export const loginUrl = 'http://appdev.novus.cc:8000/api/login';  
-export const firebasetokenurl = 'http://appdev.novus.cc:8000/api/firebasetoken';
+
+// export const loginUrl = 'http://appdev.novus.cc:8000/api/login';  
+// export const firebasetokenurl = 'http://appdev.novus.cc:8000/api/firebasetoken';
 
 
-// export const loginUrl = 'http://192.168.137.1:8000/api/login';  
-// export const firebasetokenurl = 'http://192.168.137.1:8000/api/firebasetoken';
+export const loginUrl = 'http://192.168.137.1:8000/api/login';  
+export const firebasetokenurl = 'http://192.168.137.1:8000/api/firebasetoken';
 
 
 export default class Login extends Component {
@@ -40,10 +43,10 @@ export default class Login extends Component {
         super(props);
 
         this.state = {
-            // email: 'a@a.it', 
-            // password: '1111',
-            email: '', 
-            password: '',
+            email: 'a@a.it', 
+            password: '1111',
+            // email: '', 
+            // password: '',
             fetchTimeoutTime: 10000,
             caricamento: false,
             spinner: '',
@@ -57,14 +60,17 @@ export default class Login extends Component {
 
     }
 
+   
     async componentWillMount() {
-        let notificationDisplayedListener = firebase.notifications().onNotificationDisplayed((notification) => {
 
+
+        let notificationDisplayedListener = firebase.notifications().onNotificationDisplayed((notification) => {
+console.log("onNotificationDisplayed")
         });
         let notificationListener = firebase.notifications().onNotification((notification) => {
             // Process your notification as required
 
-            /*console.log(notification)*/
+            console.log(notification)
 
                 let mnotification = new firebase.notifications.Notification({show_in_foreground: true})
                 .setNotificationId(notification.notificationId)
