@@ -28,7 +28,7 @@ import firebase from 'react-native-firebase';
 
 import {setSetting, getSetting} from '../utils/settings';
 
-import Pedometer from 'react-native-universal-pedometer';
+//import Pedometer from 'react-native-universal-pedometer';
 
 
 export class Passi extends Component{
@@ -117,13 +117,13 @@ export default class Dashboard extends Component {
       const now = new Date();
       now.setHours(0,0,0,0);
     
-      Pedometer.startPedometerUpdatesFromDate(now.getTime(), (pedometerData) => {
+      /*Pedometer.startPedometerUpdatesFromDate(now.getTime(), (pedometerData) => {
         this.setState({pedometerData: pedometerData})
         console.log(pedometerData)
 
         this.setState({pedometerData: pedometerData, esercizi: this.random(), terapia: this.random(), passi: parseFloat(this.state.pedometerData.numberOfSteps).toFixed(0), percpassi: parseFloat(this.state.pedometerData.numberOfSteps/100000).toFixed(2)})
 
-      });
+      });*/
     
     
       }

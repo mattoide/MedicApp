@@ -6,7 +6,7 @@ var {
     DeviceEventEmitter
 } = React;
 
-var RNPedometer = React.NativeModules.BMDPedometer;
+/*var RNPedometer = React.NativeModules.BMDPedometer;
 
 var Pedometer = {
   isStepCountingAvailable: function(callback) {
@@ -45,7 +45,7 @@ var Pedometer = {
         RNPedometer.stopPedometerUpdates();
       }
 
-};
+};*/
 
 // console.log(Pedometer.isFloorCountingAvailable(callback));
 
